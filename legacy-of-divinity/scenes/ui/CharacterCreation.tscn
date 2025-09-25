@@ -14,77 +14,193 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color(0.15, 0.1, 0.2, 1)
+color = Color(0.12, 0.08, 0.15, 1)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -300.0
-offset_top = -250.0
-offset_right = 300.0
-offset_bottom = 250.0
+offset_left = -450.0
+offset_top = -350.0
+offset_right = 450.0
+offset_bottom = 350.0
 
-[node name="Title" type="Label" parent="VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
 layout_mode = 2
-text = "Create Your Character"
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "🏛️ Legacy of Divinity - Character Creation 🏛️"
 horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="CharacterInfo" type="VBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="NameLabel" type="Label" parent="VBoxContainer/CharacterInfo"]
+[node name="LeftPanel" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_constants/separation = 15
+
+[node name="BasicInfo" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/HBoxContainer/LeftPanel"]
+layout_mode = 2
+custom_constants/separation = 10
+
+[node name="BasicInfoTitle" type="Label" parent="ScrollContainer/VBoxContainer/HBoxContainer/LeftPanel/BasicInfo"]
+layout_mode = 2
+text = "📝 Basic Information"
+theme_type_variation = &"HeaderLarge"
+
+[node name="BasicInfoContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/HBoxContainer/LeftPanel/BasicInfo"]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="ScrollContainer/VBoxContainer/HBoxContainer/LeftPanel/BasicInfo/BasicInfoContainer"]
 layout_mode = 2
 text = "Character Name:"
 
-[node name="NameInput" type="LineEdit" parent="VBoxContainer/CharacterInfo"]
+[node name="NameInput" type="LineEdit" parent="ScrollContainer/VBoxContainer/HBoxContainer/LeftPanel/BasicInfo/BasicInfoContainer"]
 layout_mode = 2
-placeholder_text = "Enter your character's name..."
+placeholder_text = "Enter your biblical name..."
 
-[node name="ClassLabel" type="Label" parent="VBoxContainer/CharacterInfo"]
+[node name="ClassLabel" type="Label" parent="ScrollContainer/VBoxContainer/HBoxContainer/LeftPanel/BasicInfo/BasicInfoContainer"]
 layout_mode = 2
-text = "Choose your calling:"
+text = "Choose your divine calling:"
 
-[node name="ClassOption" type="OptionButton" parent="VBoxContainer/CharacterInfo"]
-layout_mode = 2
-
-[node name="BackgroundLabel" type="Label" parent="VBoxContainer/CharacterInfo"]
-layout_mode = 2
-text = "Choose your background:"
-
-[node name="BackgroundOption" type="OptionButton" parent="VBoxContainer/CharacterInfo"]
+[node name="ClassOption" type="OptionButton" parent="ScrollContainer/VBoxContainer/HBoxContainer/LeftPanel/BasicInfo/BasicInfoContainer"]
 layout_mode = 2
 
-[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
+[node name="BackgroundLabel" type="Label" parent="ScrollContainer/VBoxContainer/HBoxContainer/LeftPanel/BasicInfo/BasicInfoContainer"]
+layout_mode = 2
+text = "Choose your origin story:"
+
+[node name="BackgroundOption" type="OptionButton" parent="ScrollContainer/VBoxContainer/HBoxContainer/LeftPanel/BasicInfo/BasicInfoContainer"]
 layout_mode = 2
 
-[node name="DescriptionLabel" type="Label" parent="VBoxContainer"]
-layout_mode = 2
-text = "Select class and background to see details..."
-autowrap_mode = 3
-vertical_alignment = 1
-
-[node name="HSeparator3" type="HSeparator" parent="VBoxContainer"]
+[node name="HSeparator1" type="HSeparator" parent="ScrollContainer/VBoxContainer/HBoxContainer/LeftPanel"]
 layout_mode = 2
 
-[node name="ButtonContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="Appearance" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/HBoxContainer/LeftPanel"]
+layout_mode = 2
+custom_constants/separation = 10
+
+[node name="AppearanceTitle" type="Label" parent="ScrollContainer/VBoxContainer/HBoxContainer/LeftPanel/Appearance"]
+layout_mode = 2
+text = "👤 Appearance"
+theme_type_variation = &"HeaderLarge"
+
+[node name="AppearanceContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/HBoxContainer/LeftPanel/Appearance"]
 layout_mode = 2
 
-[node name="BackButton" type="Button" parent="VBoxContainer/ButtonContainer"]
+[node name="GenderLabel" type="Label" parent="ScrollContainer/VBoxContainer/HBoxContainer/LeftPanel/Appearance/AppearanceContainer"]
+layout_mode = 2
+text = "Gender:"
+
+[node name="GenderOption" type="OptionButton" parent="ScrollContainer/VBoxContainer/HBoxContainer/LeftPanel/Appearance/AppearanceContainer"]
+layout_mode = 2
+
+[node name="AgeLabel" type="Label" parent="ScrollContainer/VBoxContainer/HBoxContainer/LeftPanel/Appearance/AppearanceContainer"]
+layout_mode = 2
+text = "Age Group:"
+
+[node name="AgeOption" type="OptionButton" parent="ScrollContainer/VBoxContainer/HBoxContainer/LeftPanel/Appearance/AppearanceContainer"]
+layout_mode = 2
+
+[node name="HairLabel" type="Label" parent="ScrollContainer/VBoxContainer/HBoxContainer/LeftPanel/Appearance/AppearanceContainer"]
+layout_mode = 2
+text = "Hair Color:"
+
+[node name="HairOption" type="OptionButton" parent="ScrollContainer/VBoxContainer/HBoxContainer/LeftPanel/Appearance/AppearanceContainer"]
+layout_mode = 2
+
+[node name="EyeLabel" type="Label" parent="ScrollContainer/VBoxContainer/HBoxContainer/LeftPanel/Appearance/AppearanceContainer"]
+layout_mode = 2
+text = "Eye Color:"
+
+[node name="EyeOption" type="OptionButton" parent="ScrollContainer/VBoxContainer/HBoxContainer/LeftPanel/Appearance/AppearanceContainer"]
+layout_mode = 2
+
+[node name="RightPanel" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Back"
+custom_constants/separation = 15
 
-[node name="CreateButton" type="Button" parent="VBoxContainer/ButtonContainer"]
+[node name="Description" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/HBoxContainer/RightPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+custom_constants/separation = 10
+
+[node name="DescriptionTitle" type="Label" parent="ScrollContainer/VBoxContainer/HBoxContainer/RightPanel/Description"]
+layout_mode = 2
+text = "📜 Character Details"
+theme_type_variation = &"HeaderLarge"
+
+[node name="DescriptionLabel" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/HBoxContainer/RightPanel/Description"]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "Choose your calling and background to shape your character's destiny in the biblical world."
+fit_content = true
+
+[node name="Stats" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/HBoxContainer/RightPanel"]
+layout_mode = 2
+custom_constants/separation = 10
+
+[node name="StatsTitle" type="Label" parent="ScrollContainer/VBoxContainer/HBoxContainer/RightPanel/Stats"]
+layout_mode = 2
+text = "⚡ Starting Stats Preview"
+theme_type_variation = &"HeaderLarge"
+
+[node name="StatsContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/HBoxContainer/RightPanel/Stats"]
+layout_mode = 2
+
+[node name="HealthStat" type="Label" parent="ScrollContainer/VBoxContainer/HBoxContainer/RightPanel/Stats/StatsContainer"]
+layout_mode = 2
+text = "❤️ Health: 100"
+
+[node name="FaithStat" type="Label" parent="ScrollContainer/VBoxContainer/HBoxContainer/RightPanel/Stats/StatsContainer"]
+layout_mode = 2
+text = "✨ Faith: 0"
+
+[node name="WisdomStat" type="Label" parent="ScrollContainer/VBoxContainer/HBoxContainer/RightPanel/Stats/StatsContainer"]
+layout_mode = 2
+text = "🧠 Wisdom: 0"
+
+[node name="SocialStat" type="Label" parent="ScrollContainer/VBoxContainer/HBoxContainer/RightPanel/Stats/StatsContainer"]
+layout_mode = 2
+text = "🗣️ Social: 0"
+
+[node name="AlignmentStat" type="Label" parent="ScrollContainer/VBoxContainer/HBoxContainer/RightPanel/Stats/StatsContainer"]
+layout_mode = 2
+text = "⚖️ Moral Alignment: Neutral"
+
+[node name="HSeparator2" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ButtonContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="ScrollContainer/VBoxContainer/ButtonContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Begin Journey"
+text = "⬅️ Back to Menu"
 
-[connection signal="pressed" from="VBoxContainer/ButtonContainer/BackButton" to="." method="_on_back_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/ButtonContainer/CreateButton" to="." method="_on_create_button_pressed"]
+[node name="RandomButton" type="Button" parent="ScrollContainer/VBoxContainer/ButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "🎲 Random Character"
+
+[node name="CreateButton" type="Button" parent="ScrollContainer/VBoxContainer/ButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "✨ Begin Your Journey"
+
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/ButtonContainer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/ButtonContainer/RandomButton" to="." method="_on_random_button_pressed"]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/ButtonContainer/CreateButton" to="." method="_on_create_button_pressed"]

@@ -1,8 +1,9 @@
 63f7b34db8d8cdea90c76aacccf841ec
-::res://::1758819879
+::res://::1758822761
 ASSET_IMPORT_GUIDE.md::TextFile::-1::1758814610::0::1::::<><><>0<>0<><>::
-icon.svg::CompressedTexture2D::1480391820935918985::1758766333::1758819881::1::::<><><>0<>0<>0db81b585b0c34b93f2ee6e025c5a4b4<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
+icon.svg::CompressedTexture2D::1480391820935918985::1758766333::1758822762::1::::<><><>0<>0<>0db81b585b0c34b93f2ee6e025c5a4b4<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
 README.md::TextFile::-1::1758765867::0::1::::<><><>0<>0<><>::
+Screenshot 2025-09-25 133408.png::CompressedTexture2D::6478935175326148499::1758821691::1758822762::1::::<><><>0<>0<>2ff2dafae3fd81d9d9de28b060956a3b<>res://.godot/imported/Screenshot 2025-09-25 133408.png-163fa50ad6cbb83b1004f6c1f21dbbd7.ctex::
 ::res://assets/::1758815205
 ::res://assets/audio/::1758815205
 ::res://assets/audio/music/::1758815291
@@ -37,8 +38,8 @@ README.md::TextFile::-1::1758765867::0::1::::<><><>0<>0<><>::
 ::res://scenes/main/::1758765682
 MainMenu.tscn::PackedScene::3938272551383705817::1758765682::0::1::::<><><>0<>0<><>::res://scripts/ui/MainMenu.gd
 ::res://scenes/player/::1758765590
-::res://scenes/ui/::1758766377
-CharacterCreation.tscn::PackedScene::3010952618296176268::1758765732::0::1::::<><><>0<>0<><>::res://scripts/ui/CharacterCreation.gd
+::res://scenes/ui/::1758821771
+CharacterCreation.tscn::PackedScene::3010952618296176268::1758821771::0::1::::<><><>0<>0<><>::res://scripts/ui/CharacterCreation.gd
 MoralChoiceDialog.tscn::PackedScene::5324432603988447378::1758765778::0::1::::<><><>0<>0<><>::res://scripts/ui/MoralChoiceDialog.gd
 MultiplayerMenu.tscn::PackedScene::3531103073195625126::1758766377::0::1::::<><><>0<>0<><>::res://scripts/ui/MultiplayerMenu.gd
 ::res://scenes/world/::1758819293
@@ -55,8 +56,8 @@ PlayerData.gd::GDScript::7167647654681019507::1758810589::0::1::::<>Node<><>0<>0
 ::res://scripts/networking/::1758765590
 ::res://scripts/player/::1758815729
 PlayerController.gd::GDScript::4999014369331373286::1758813481::0::1::::<>CharacterBody3D<><>0<>0<><>::
-::res://scripts/ui/::1758815643
-CharacterCreation.gd::GDScript::8859384064346066135::1758815637::0::1::::<>Control<><>0<>0<><>::
+::res://scripts/ui/::1758821390
+CharacterCreation.gd::GDScript::8859384064346066135::1758821390::0::1::::<>Control<><>0<>0<><>::
 MainMenu.gd::GDScript::491476630338552945::1758815643::0::1::::<>Control<><>0<>0<><>::
 MoralChoiceDialog.gd::GDScript::315527414019852654::1758765766::0::1::::<>Control<><>0<>0<><>::
 MultiplayerMenu.gd::GDScript::620543581867867074::1758766355::0::1::::<>Control<><>0<>0<><>::

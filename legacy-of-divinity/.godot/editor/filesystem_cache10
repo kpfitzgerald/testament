@@ -1,5 +1,6 @@
 63f7b34db8d8cdea90c76aacccf841ec
-::res://::1758765983
+::res://::1758766333
+icon.svg::CompressedTexture2D::1480391820935918985::1758766333::1758766377::1::::<><><>0<>0<>0db81b585b0c34b93f2ee6e025c5a4b4<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
 README.md::TextFile::-1::1758765867::0::1::::<><><>0<>0<><>::
 ::res://assets/::1758765590
 ::res://assets/audio/::1758765590
@@ -14,13 +15,14 @@ README.md::TextFile::-1::1758765867::0::1::::<><><>0<>0<><>::
 ::res://scenes/main/::1758765682
 MainMenu.tscn::PackedScene::3938272551383705817::1758765682::0::1::::<><><>0<>0<><>::res://scripts/ui/MainMenu.gd
 ::res://scenes/player/::1758765590
-::res://scenes/ui/::1758765778
+::res://scenes/ui/::1758766345
 CharacterCreation.tscn::PackedScene::3010952618296176268::1758765732::0::1::::<><><>0<>0<><>::res://scripts/ui/CharacterCreation.gd
 MoralChoiceDialog.tscn::PackedScene::5324432603988447378::1758765778::0::1::::<><><>0<>0<><>::res://scripts/ui/MoralChoiceDialog.gd
+MultiplayerMenu.tscn::PackedScene::-1::1758766345::0::1::::<><><>0<>0<><>::
 ::res://scenes/world/::1758765794
 GameWorld.tscn::PackedScene::3355787100761399451::1758765794::0::1::::<><><>0<>0<><>::res://scripts/world/GameWorld.gd
 ::res://scripts/::1758765590
-::res://scripts/autoload/::1758765662
+::res://scripts/autoload/::1758765985
 GameManager.gd::GDScript::6224378588197853226::1758765591::0::1::::<>Node<><>0<>0<><>::
 LegacySystem.gd::GDScript::3295411772169938317::1758765662::0::1::::<>Node<><>0<>0<><>::
 NetworkManager.gd::GDScript::7384870139524247967::1758765605::0::1::::<>Node<><>0<>0<><>::
@@ -28,9 +30,10 @@ PlayerData.gd::GDScript::7167647654681019507::1758765631::0::1::::<>Node<><>0<>0
 ::res://scripts/legacy/::1758765590
 ::res://scripts/networking/::1758765590
 ::res://scripts/player/::1758765590
-::res://scripts/ui/::1758765766
+::res://scripts/ui/::1758766355
 CharacterCreation.gd::GDScript::8859384064346066135::1758765718::0::1::::<>Control<><>0<>0<><>::
 MainMenu.gd::GDScript::491476630338552945::1758765692::0::1::::<>Control<><>0<>0<><>::
 MoralChoiceDialog.gd::GDScript::315527414019852654::1758765766::0::1::::<>Control<><>0<>0<><>::
-::res://scripts/world/::1758765816
+MultiplayerMenu.gd::GDScript::620543581867867074::1758766355::0::1::::<>Control<><>0<>0<><>::
+::res://scripts/world/::1758765985
 GameWorld.gd::GDScript::9102276191606185871::1758765816::0::1::::<>Node3D<><>0<>0<><>::

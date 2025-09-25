@@ -46,4 +46,5 @@ func get_current_player() -> Node:
 
 func set_current_player(player: Node):
 	current_player = player
-	print("Current player set: ", player.name if player else "null")
+	var player_name = player.name if player != null else "null"
+	print("Current player set: ", player_name)

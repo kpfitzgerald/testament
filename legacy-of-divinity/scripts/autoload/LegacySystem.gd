@@ -1,6 +1,5 @@
 extends Node
 
-signal legacy_updated
 signal generation_advanced(new_generation)
 
 # Legacy tracking
@@ -41,6 +40,10 @@ func record_moral_choice(choice_data: Dictionary):
 	update_family_reputation(choice_value)
 
 	save_legacy_data()
+
+	# Notify UI systems that legacy data changed
+	if choice_value != 0:
+		print("Legacy updated: Family reputation now ", family_reputation)
 
 func record_major_deed(deed_data: Dictionary):
 	var current_gen = PlayerData.generation
@@ -100,28 +103,28 @@ func calculate_generational_bonuses(completed_generation: int):
 		elif avg_alignment <= -50:
 			add_family_curse("Dark Heritage", "Your family's wickedness burdens descendants with -10 starting reputation")
 
-func add_family_blessing(name: String, description: String):
+func add_family_blessing(blessing_name: String, description: String):
 	var blessing = {
-		"name": name,
+		"name": blessing_name,
 		"description": description,
 		"generation_granted": PlayerData.generation,
 		"active": true
 	}
 	family_blessings.append(blessing)
-	print("Family Blessing Gained: ", name)
+	print("Family Blessing Gained: ", blessing_name)
 
-func add_family_curse(name: String, description: String):
+func add_family_curse(curse_name: String, description: String):
 	var curse = {
-		"name": name,
+		"name": curse_name,
 		"description": description,
 		"generation_cursed": PlayerData.generation,
 		"active": true
 	}
 	family_curses.append(curse)
-	print("Family Curse Incurred: ", name)
+	print("Family Curse Incurred: ", curse_name)
 
 func update_family_reputation(change: int):
-	family_reputation += change / 10  # Smaller increments for family rep
+	family_reputation += change / 10.0  # Smaller increments for family rep
 	family_reputation = clamp(family_reputation, -100, 100)
 
 func update_divine_favor(change: int):
@@ -213,6 +216,6 @@ func get_family_history_summary() -> String:
 
 		for player_id in gen_data.keys():
 			var character = gen_data[player_id]
-			summary += "  - " + character.name + " (Alignment: " + str(character.get("final_alignment", "Active")) + ")\n"
+			summary += "  - " + character.get("name", "Unknown") + " (Alignment: " + str(character.get("final_alignment", "Active")) + ")\n"
 
 	return summary

@@ -23,6 +23,9 @@ GameManager="*res://scripts/autoload/GameManager.gd"
 NetworkManager="*res://scripts/autoload/NetworkManager.gd"
 PlayerData="*res://scripts/autoload/PlayerData.gd"
 LegacySystem="*res://scripts/autoload/LegacySystem.gd"
+WorldData="*res://scripts/autoload/WorldData.gd"
+InventorySystem="*res://scripts/autoload/InventorySystem.gd"
+DialogueSystem="*res://scripts/autoload/DialogueSystem.gd"
 
 [display]
 

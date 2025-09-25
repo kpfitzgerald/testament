@@ -13,8 +13,34 @@ var level: int = 1
 var experience: int = 0
 var health: int = 100
 var max_health: int = 100
-var faith_points: int = 0
-var wisdom_points: int = 0
+var faith_points: int = 50
+var wisdom_points: int = 50
+var social_skills: int = 50
+
+# Skill system
+var skills: Dictionary = {
+	"faith": {"level": 1, "experience": 0, "max_level": 100},
+	"wisdom": {"level": 1, "experience": 0, "max_level": 100},
+	"social": {"level": 1, "experience": 0, "max_level": 100},
+	"crafting": {"level": 1, "experience": 0, "max_level": 100},
+	"trading": {"level": 1, "experience": 0, "max_level": 100},
+	"healing": {"level": 1, "experience": 0, "max_level": 100},
+	"combat": {"level": 1, "experience": 0, "max_level": 100},
+	"leadership": {"level": 1, "experience": 0, "max_level": 100}
+}
+
+# Attributes that affect gameplay
+var attributes: Dictionary = {
+	"strength": 10,
+	"intelligence": 10,
+	"charisma": 10,
+	"spirit": 10,
+	"endurance": 10
+}
+
+# Available skill points for distribution
+var skill_points: int = 0
+var attribute_points: int = 0
 
 # Player choices and history
 var moral_choices: Array[Dictionary] = []
@@ -111,8 +137,122 @@ func level_up():
 	level += 1
 	max_health += 10
 	health = max_health
+	skill_points += 3  # Gain skill points on level up
+	attribute_points += 1  # Gain attribute points on level up
 	print("Level up! New level: ", level)
 	save_player_data()
+	player_data_updated.emit()
+
+func add_skill_experience(skill_name: String, amount: int):
+	if not skills.has(skill_name):
+		return false
+
+	var skill = skills[skill_name]
+	skill.experience += amount
+
+	# Check for skill level up
+	var required_exp = skill.level * 100  # Progressive requirement
+	while skill.experience >= required_exp and skill.level < skill.max_level:
+		skill.level += 1
+		skill.experience -= required_exp
+		required_exp = skill.level * 100
+		print("Skill level up! ", skill_name, " is now level ", skill.level)
+
+	# Update related stats when skills level up
+	_update_stats_from_skills()
+	save_player_data()
+	player_data_updated.emit()
+	return true
+
+func _update_stats_from_skills():
+	# Update character stats based on skill levels
+	faith_points = 50 + (skills.faith.level * 5)
+	wisdom_points = 50 + (skills.wisdom.level * 5)
+	social_skills = 50 + (skills.social.level * 5)
+
+func spend_skill_point(skill_name: String) -> bool:
+	if skill_points <= 0 or not skills.has(skill_name):
+		return false
+
+	var skill = skills[skill_name]
+	if skill.level >= skill.max_level:
+		return false
+
+	skill_points -= 1
+	skill.level += 1
+	_update_stats_from_skills()
+	save_player_data()
+	player_data_updated.emit()
+	print("Skill point spent on ", skill_name, ". New level: ", skill.level)
+	return true
+
+func spend_attribute_point(attribute_name: String) -> bool:
+	if attribute_points <= 0 or not attributes.has(attribute_name):
+		return false
+
+	attribute_points -= 1
+	attributes[attribute_name] += 1
+	_update_max_health_from_attributes()
+	save_player_data()
+	player_data_updated.emit()
+	print("Attribute point spent on ", attribute_name, ". New value: ", attributes[attribute_name])
+	return true
+
+func _update_max_health_from_attributes():
+	# Base health + endurance bonus
+	var base_health = 100
+	var endurance_bonus = (attributes.endurance - 10) * 5
+	max_health = base_health + endurance_bonus
+	if health > max_health:
+		health = max_health
+
+func get_skill_level(skill_name: String) -> int:
+	if skills.has(skill_name):
+		return skills[skill_name].level
+	return 1
+
+func get_skill_experience(skill_name: String) -> int:
+	if skills.has(skill_name):
+		return skills[skill_name].experience
+	return 0
+
+func get_skill_progress(skill_name: String) -> float:
+	if not skills.has(skill_name):
+		return 0.0
+
+	var skill = skills[skill_name]
+	var required_exp = skill.level * 100
+	return float(skill.experience) / float(required_exp)
+
+func get_character_power_level() -> int:
+	var total_power = level * 10
+	for skill_name in skills.keys():
+		total_power += skills[skill_name].level
+	for attr_name in attributes.keys():
+		total_power += attributes[attr_name]
+	return total_power
+
+func get_class_bonus_skills() -> Array[String]:
+	# Return skills that get bonuses based on selected class
+	match selected_class:
+		"Prophet":
+			return ["faith", "wisdom"]
+		"Warrior of God":
+			return ["combat", "leadership"]
+		"High Priest":
+			return ["faith", "healing"]
+		"Desert Hermit":
+			return ["wisdom", "crafting"]
+		"Royal Scribe":
+			return ["wisdom", "social"]
+		"Temple Musician":
+			return ["faith", "social"]
+		"Merchant Prince":
+			return ["trading", "social"]
+		"Pilgrim":
+			return ["faith", "wisdom", "social"]  # Balanced class gets multiple bonuses
+		_:
+			return []
 
 func save_player_data():
 	var save_data = {
@@ -126,6 +266,11 @@ func save_player_data():
 		"max_health": max_health,
 		"faith_points": faith_points,
 		"wisdom_points": wisdom_points,
+		"social_skills": social_skills,
+		"skills": skills,
+		"attributes": attributes,
+		"skill_points": skill_points,
+		"attribute_points": attribute_points,
 		"selected_class": selected_class,
 		"selected_background": selected_background,
 		"character_appearance": character_appearance,
@@ -133,7 +278,9 @@ func save_player_data():
 		"completed_quests": completed_quests,
 		"active_quests": active_quests,
 		"ancestor_data": ancestor_data,
-		"legacy_bonuses": legacy_bonuses
+		"legacy_bonuses": legacy_bonuses,
+		"inventory_data": InventorySystem.save_inventory_data() if InventorySystem else {},
+		"dialogue_data": DialogueSystem.save_dialogue_data() if DialogueSystem else {}
 	}
 
 	var file = FileAccess.open("user://player_data.json", FileAccess.WRITE)
@@ -161,8 +308,28 @@ func load_player_data():
 			experience = save_data.get("experience", 0)
 			health = save_data.get("health", 100)
 			max_health = save_data.get("max_health", 100)
-			faith_points = save_data.get("faith_points", 0)
-			wisdom_points = save_data.get("wisdom_points", 0)
+			faith_points = save_data.get("faith_points", 50)
+			wisdom_points = save_data.get("wisdom_points", 50)
+			social_skills = save_data.get("social_skills", 50)
+			skills = save_data.get("skills", {
+				"faith": {"level": 1, "experience": 0, "max_level": 100},
+				"wisdom": {"level": 1, "experience": 0, "max_level": 100},
+				"social": {"level": 1, "experience": 0, "max_level": 100},
+				"crafting": {"level": 1, "experience": 0, "max_level": 100},
+				"trading": {"level": 1, "experience": 0, "max_level": 100},
+				"healing": {"level": 1, "experience": 0, "max_level": 100},
+				"combat": {"level": 1, "experience": 0, "max_level": 100},
+				"leadership": {"level": 1, "experience": 0, "max_level": 100}
+			})
+			attributes = save_data.get("attributes", {
+				"strength": 10,
+				"intelligence": 10,
+				"charisma": 10,
+				"spirit": 10,
+				"endurance": 10
+			})
+			skill_points = save_data.get("skill_points", 0)
+			attribute_points = save_data.get("attribute_points", 0)
 			selected_class = save_data.get("selected_class", "")
 			selected_background = save_data.get("selected_background", "")
 			character_appearance = save_data.get("character_appearance", {})
@@ -186,6 +353,16 @@ func load_player_data():
 			for ancestor in loaded_ancestor_data:
 				ancestor_data.append(ancestor)
 			legacy_bonuses = save_data.get("legacy_bonuses", {})
+
+			# Load inventory data
+			var inventory_data = save_data.get("inventory_data", {})
+			if InventorySystem and not inventory_data.is_empty():
+				InventorySystem.load_inventory_data(inventory_data)
+
+			# Load dialogue data
+			var dialogue_data = save_data.get("dialogue_data", {})
+			if DialogueSystem and not dialogue_data.is_empty():
+				DialogueSystem.load_dialogue_data(dialogue_data)
 
 			print("Player data loaded")
 		else:

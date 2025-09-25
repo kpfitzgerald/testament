@@ -1,0 +1,94 @@
+[gd_scene load_steps=2 format=3 uid="uid://bn2tk8xr4lgdv"]
+
+[ext_resource type="Script" path="res://scripts/world/GameWorld.gd" id="1_1x4jv"]
+
+[node name="GameWorld" type="Node3D"]
+script = ExtResource("1_1x4jv")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 10, 0)
+
+[node name="Ground" type="StaticBody3D" parent="."]
+
+[node name="GroundMesh" type="MeshInstance3D" parent="Ground"]
+mesh = BoxMesh.new()
+transform = Transform3D(20, 0, 0, 0, 1, 0, 0, 0, 20, 0, -1, 0)
+
+[node name="GroundCollision" type="CollisionShape3D" parent="Ground"]
+shape = BoxShape3D.new()
+transform = Transform3D(20, 0, 0, 0, 1, 0, 0, 0, 20, 0, -1, 0)
+
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="PlayerMesh" type="MeshInstance3D" parent="Player"]
+mesh = CapsuleMesh.new()
+
+[node name="PlayerCollision" type="CollisionShape3D" parent="Player"]
+shape = CapsuleShape3D.new()
+
+[node name="Camera3D" type="Camera3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 2, 3)
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="HUD" type="Control" parent="UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="StatsPanel" type="Panel" parent="UI/HUD"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -150.0
+offset_right = 250.0
+offset_bottom = -10.0
+
+[node name="StatsContainer" type="VBoxContainer" parent="UI/HUD/StatsPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+
+[node name="NameLabel" type="Label" parent="UI/HUD/StatsPanel/StatsContainer"]
+layout_mode = 2
+text = "Character Name"
+
+[node name="HealthLabel" type="Label" parent="UI/HUD/StatsPanel/StatsContainer"]
+layout_mode = 2
+text = "Health: 100/100"
+
+[node name="AlignmentLabel" type="Label" parent="UI/HUD/StatsPanel/StatsContainer"]
+layout_mode = 2
+text = "Alignment: Neutral"
+
+[node name="LevelLabel" type="Label" parent="UI/HUD/StatsPanel/StatsContainer"]
+layout_mode = 2
+text = "Level: 1"
+
+[node name="GenerationLabel" type="Label" parent="UI/HUD/StatsPanel/StatsContainer"]
+layout_mode = 2
+text = "Generation: 1"
+
+[node name="TestChoiceButton" type="Button" parent="UI/HUD"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -150.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 50.0
+text = "Test Moral Choice"

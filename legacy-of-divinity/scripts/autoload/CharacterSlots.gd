@@ -129,10 +129,13 @@ func select_character_slot(slot_id: int) -> bool:
 
 # Delete/reset a character slot
 func reset_character_slot(slot_id: int):
+	print("CharacterSlots: reset_character_slot called for slot ", slot_id)
 	if slot_id >= 0 and slot_id < character_slots.size():
+		print("CharacterSlots: Slot ", slot_id, " is valid, proceeding with reset")
 		# Delete the character save file
 		var save_file = character_slots[slot_id].get("save_file", "")
 		if save_file != "" and FileAccess.file_exists(save_file):
+			print("CharacterSlots: Deleting save file: ", save_file)
 			DirAccess.remove_absolute(save_file)
 
 		# Reset slot data
@@ -147,8 +150,13 @@ func reset_character_slot(slot_id: int):
 			"last_played": "",
 			"save_file": "user://character_slot_%d.json" % slot_id
 		}
+		print("CharacterSlots: Slot ", slot_id, " reset to empty state")
 		save_character_slots()
+		print("CharacterSlots: Character slots saved")
 		character_slots_updated.emit()
+		print("CharacterSlots: character_slots_updated signal emitted")
+	else:
+		print("CharacterSlots: ERROR - Invalid slot_id ", slot_id, " (max: ", character_slots.size() - 1, ")")
 
 # Get current character slot
 func get_current_slot() -> int:

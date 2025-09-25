@@ -49,7 +49,7 @@ func _ready():
 	print("CharacterSelectUI: Ready complete")
 
 func _refresh_character_list():
-	print("CharacterSelectUI: _refresh_character_list() called")
+	print("=== CharacterSelectUI: _refresh_character_list() called ===")
 
 	# Clear existing items
 	for child in character_grid.get_children():
@@ -66,8 +66,10 @@ func _refresh_character_list():
 	for slot in slots:
 		var slot_item = _create_character_slot_item(slot)
 		character_grid.add_child(slot_item)
-		print("CharacterSelectUI: Added slot ", slot.get("slot_id", -1), " to grid")
-	print("CharacterSelectUI: Character list refresh complete")
+		var is_empty = slot.get("is_empty", true)
+		var name = slot.get("character_name", "")
+		print("CharacterSelectUI: Added slot ", slot.get("slot_id", -1), " to grid - Empty: ", is_empty, ", Name: ", name)
+	print("=== CharacterSelectUI: Character list refresh complete ===")
 
 func _create_character_slot_item(slot_data: Dictionary) -> Control:
 	# Create a simple panel container instead of layered controls
@@ -199,13 +201,19 @@ func _on_reset_character(slot_id: int):
 	add_child(dialog)
 	dialog.popup_centered()
 
-	# Wait for user choice
-	var result = await dialog.confirmed
-	if result:
-		if CharacterSlots:
-			CharacterSlots.reset_character_slot(slot_id)
-			_refresh_character_list()
+	# Connect to confirmation signal instead of using await
+	dialog.confirmed.connect(_on_reset_confirmed.bind(slot_id, dialog))
+	dialog.canceled.connect(_on_reset_canceled.bind(dialog))
 
+func _on_reset_confirmed(slot_id: int, dialog: ConfirmationDialog):
+	print("CharacterSelectUI: Reset confirmed for slot ", slot_id)
+	if CharacterSlots:
+		CharacterSlots.reset_character_slot(slot_id)
+		_refresh_character_list()
+	dialog.queue_free()
+
+func _on_reset_canceled(dialog: ConfirmationDialog):
+	print("CharacterSelectUI: Reset canceled")
 	dialog.queue_free()
 
 func _on_new_character_pressed():

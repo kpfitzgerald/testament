@@ -47,6 +47,11 @@ func _on_settings_button_pressed():
 	# Create settings popup or scene
 	pass
 
+func _on_test_ui_button_pressed():
+	print("Opening UI Test Environment...")
+	var error = get_tree().change_scene_to_file("res://scenes/world/GameWorld.tscn")
+	if error != OK:
+		print("ERROR: Failed to change scene to GameWorld - Error code: ", error)
 func _on_quit_button_pressed():
 	print("Quitting game...")
 	get_tree().quit()

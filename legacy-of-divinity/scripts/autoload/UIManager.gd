@@ -13,6 +13,7 @@ const DIALOGUE_UI_SCENE = preload("res://scenes/ui/DialogueUI.tscn")
 # UI state tracking
 var current_open_ui: Control = null
 var ui_stack: Array[Control] = []
+var test_data_applied: bool = false  # Track if test data was already applied
 
 signal ui_opened(ui_name)
 signal ui_closed(ui_name)
@@ -20,7 +21,8 @@ signal ui_closed(ui_name)
 func _ready():
 	# Initialize UI systems when game is ready
 	# Only initialize UI systems if not on main menu
-	var scene_name = get_tree().current_scene.name if get_tree().current_scene else ""
+	var current_scene = get_tree().current_scene
+	var scene_name = current_scene.name if current_scene else ""
 	if scene_name != "MainMenu":
 		call_deferred("_initialize_ui_systems")
 
@@ -32,23 +34,37 @@ func _initialize_ui_systems():
 	# Wait for the scene tree to be ready
 	await get_tree().process_frame
 
+	print("DEBUG: Attempting to initialize UI systems...")
+	print("DEBUG: Current scene: ", get_tree().current_scene.name if get_tree().current_scene else "null")
+
 	# Find the main game scene or create UI container
 	var ui_container = _get_or_create_ui_container()
 	if not ui_container:
-		print("Warning: Could not create UI container")
+		print("ERROR: Could not create UI container - UI systems will not work")
 		return
+
+	print("DEBUG: UI container found/created: ", ui_container.name)
 
 	# Instantiate UI scenes
 	inventory_ui = INVENTORY_UI_SCENE.instantiate()
 	skills_ui = SKILLS_UI_SCENE.instantiate()
 	dialogue_ui = DIALOGUE_UI_SCENE.instantiate()
 
+	print("DEBUG: UI scenes instantiated successfully")
+
 	# Add to scene tree
 	ui_container.add_child(inventory_ui)
 	ui_container.add_child(skills_ui)
 	ui_container.add_child(dialogue_ui)
 
-	print("UI systems initialized successfully")
+	print("DEBUG: UI scenes added to container")
+
+	# Hide by default
+	inventory_ui.visible = false
+	skills_ui.visible = false
+	dialogue_ui.visible = false
+
+	print("UI systems initialized successfully - inventory_ui available: ", inventory_ui != null)
 
 func _get_or_create_ui_container() -> Control:
 	# Try to find existing UI container in the current scene
@@ -68,12 +84,25 @@ func _get_or_create_ui_container() -> Control:
 		if ui_container and ui_container is Control:
 			return ui_container
 
-	# Create new UI container
+	# Look for existing UI Control node in GameWorld scene
+	var ui_node = current_scene.get_node_or_null("UI")
+	if ui_node and ui_node is Control:
+		return ui_node
+
+	# Create new UI container if current scene is Control
 	if current_scene is Control:
 		ui_container = Control.new()
 		ui_container.name = "UIContainer"
 		ui_container.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 		current_scene.add_child(ui_container)
+		return ui_container
+
+	# For Node3D scenes like GameWorld, try to create under existing UI node
+	if ui_node:
+		ui_container = Control.new()
+		ui_container.name = "UIContainer"
+		ui_container.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		ui_node.add_child(ui_container)
 		return ui_container
 
 	return null
@@ -218,11 +247,16 @@ func test_dialogue_miriam():
 func add_test_items():
 	# Add some test items to inventory for demonstration
 	if InventorySystem:
-		InventorySystem.add_item("daily_bread", 3)
-		InventorySystem.add_item("blessed_water", 2)
-		InventorySystem.add_item("shepherds_staff", 1)
-		InventorySystem.add_item("simple_robe", 1)
+		print("Adding test items to inventory...")
+		var added1 = InventorySystem.add_item("daily_bread", 3)
+		var added2 = InventorySystem.add_item("blessed_water", 2)
+		var added3 = InventorySystem.add_item("shepherds_staff", 1)
+		var added4 = InventorySystem.add_item("simple_robe", 1)
 		InventorySystem.gold_coins += 50
+		print("Test items added: bread=", added1, " water=", added2, " staff=", added3, " robe=", added4)
+		print("Current inventory size: ", InventorySystem.inventory_items.size())
+	else:
+		print("ERROR: InventorySystem not available for adding test items")
 
 func add_test_experience():
 	# Add some experience for testing progression
@@ -232,8 +266,35 @@ func add_test_experience():
 		PlayerData.add_skill_experience("wisdom", 50)
 		PlayerData.add_skill_experience("social", 25)
 
+# Clear some inventory space for testing
+func clear_inventory_space():
+	if InventorySystem:
+		print("Clearing inventory space for testing...")
+		# Remove stackable items more aggressively
+		InventorySystem.remove_item("daily_bread", 999)  # Remove all bread
+		InventorySystem.remove_item("blessed_water", 999)  # Remove all water
+		InventorySystem.remove_item("scroll_blank", 999)   # Remove all scrolls
+		InventorySystem.remove_item("pottery_clay", 999)   # Remove all clay
+		InventorySystem.remove_item("frankincense", 999)   # Remove all incense
+
+		# Clear inventory completely if still too full
+		if InventorySystem.inventory_items.size() > 45:
+			print("Inventory still too full, clearing more items...")
+			InventorySystem.inventory_items.clear()
+			# Re-add just essential starting items
+			InventorySystem.add_item("simple_robe", 1)
+			InventorySystem.add_item("daily_bread", 2)
+
+		print("Inventory cleared - now has ", InventorySystem.inventory_items.size(), " items")
+
 # Initialize test data for demonstration
 func setup_test_data():
+	if test_data_applied:
+		print("Test data already applied this session")
+		return
+
+	clear_inventory_space()  # Clear space first
 	add_test_items()
 	add_test_experience()
+	test_data_applied = true
 	print("Test data added to character")

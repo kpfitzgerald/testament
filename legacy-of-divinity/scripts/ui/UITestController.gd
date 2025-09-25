@@ -4,6 +4,8 @@ extends Control
 # Add this script to any scene to test the UI systems
 
 func _ready():
+	print("=== UITestController Ready - Input system active ===")
+	print("UITestController: UIManager available = ", UIManager != null)
 	print("=== UI Test Controller Ready ===")
 	print("Controls:")
 	print("I/TAB - Toggle Inventory")
@@ -22,28 +24,8 @@ func _setup_test_data():
 	if UIManager:
 		UIManager.setup_test_data()
 
-func _input(event):
-	if event is InputEventKey and event.pressed:
-		match event.keycode:
-			KEY_1:
-				print("Testing High Priest Aaron dialogue...")
-				if UIManager:
-					UIManager.test_dialogue_aaron()
-			KEY_2:
-				print("Testing Merchant Benjamin dialogue...")
-				if UIManager:
-					UIManager.test_dialogue_benjamin()
-			KEY_3:
-				print("Testing Prophetess Miriam dialogue...")
-				if UIManager:
-					UIManager.test_dialogue_miriam()
-			KEY_T:
-				print("Adding test data...")
-				if UIManager:
-					UIManager.setup_test_data()
-			KEY_F1:
-				print("=== Current Game State ===")
-				_print_game_state()
+# Input handling removed - GameWorld handles all input now
+# This prevents double input handling issues
 
 func _print_game_state():
 	if PlayerData:

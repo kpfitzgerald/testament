@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bn2tk8xr4lgdv"]
+[gd_scene load_steps=6 format=3 uid="uid://bn2tk8xr4lgdv"]
 
 [ext_resource type="Script" path="res://scripts/world/GameWorld.gd" id="1_1x4jv"]
 [ext_resource type="Script" path="res://scripts/player/PlayerController.gd" id="2_player"]
+[ext_resource type="Script" path="res://scripts/ui/UITestController.gd" id="3_uitest"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_1"]
 size = Vector3(40, 2, 40)
@@ -128,3 +129,7 @@ Space - Jump
 ESC - Toggle mouse
 Esc (hold) - Main Menu"
 vertical_alignment = 2
+[node name="UITestController" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("3_uitest")

@@ -7,7 +7,7 @@ signal item_unequipped
 # Inventory data
 var inventory_items: Array[Dictionary] = []
 var equipped_items: Dictionary = {}
-var max_inventory_slots: int = 30
+var max_inventory_slots: int = 50  # Increased for testing
 var gold_coins: int = 100
 
 # Equipment slots

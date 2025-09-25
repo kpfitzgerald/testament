@@ -1,0 +1,151 @@
+[gd_scene load_steps=2 format=3 uid="uid://dqry8j4x5lpdk"]
+
+[ext_resource type="Script" path="res://scripts/ui/DialogueUI.gd" id="1_dialogue"]
+
+[node name="DialogueUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+visible = false
+script = ExtResource("1_dialogue")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 0.5)
+
+[node name="DialoguePanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -500.0
+offset_top = -250.0
+offset_right = 500.0
+offset_bottom = -20.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DialoguePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+
+[node name="NPCInfo" type="HBoxContainer" parent="DialoguePanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="NPCPortrait" type="ColorRect" parent="DialoguePanel/VBoxContainer/NPCInfo"]
+layout_mode = 2
+custom_minimum_size = Vector2(64, 64)
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="PortraitLabel" type="Label" parent="DialoguePanel/VBoxContainer/NPCInfo/NPCPortrait"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+text = "👤"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NPCNameContainer" type="VBoxContainer" parent="DialoguePanel/VBoxContainer/NPCInfo"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="NPCName" type="Label" parent="DialoguePanel/VBoxContainer/NPCInfo/NPCNameContainer"]
+layout_mode = 2
+text = "NPC Name"
+theme_type_variation = &"HeaderMedium"
+
+[node name="NPCTitle" type="Label" parent="DialoguePanel/VBoxContainer/NPCInfo/NPCNameContainer"]
+layout_mode = 2
+text = "Title or Role"
+theme_type_variation = &"HeaderSmall"
+
+[node name="CloseButton" type="Button" parent="DialoguePanel/VBoxContainer/NPCInfo"]
+layout_mode = 2
+text = "❌"
+
+[node name="HSeparator" type="HSeparator" parent="DialoguePanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="DialogueContent" type="VBoxContainer" parent="DialoguePanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DialogueText" type="RichTextLabel" parent="DialoguePanel/VBoxContainer/DialogueContent"]
+layout_mode = 2
+size_flags_vertical = 3
+custom_minimum_size = Vector2(0, 80)
+bbcode_enabled = true
+text = "NPC dialogue will appear here..."
+fit_content = true
+scroll_active = false
+
+[node name="ChoicesContainer" type="VBoxContainer" parent="DialoguePanel/VBoxContainer/DialogueContent"]
+layout_mode = 2
+
+[node name="Choice1" type="Button" parent="DialoguePanel/VBoxContainer/DialogueContent/ChoicesContainer"]
+layout_mode = 2
+text = "Choice 1"
+visible = false
+alignment = 0
+
+[node name="Choice2" type="Button" parent="DialoguePanel/VBoxContainer/DialogueContent/ChoicesContainer"]
+layout_mode = 2
+text = "Choice 2"
+visible = false
+alignment = 0
+
+[node name="Choice3" type="Button" parent="DialoguePanel/VBoxContainer/DialogueContent/ChoicesContainer"]
+layout_mode = 2
+text = "Choice 3"
+visible = false
+alignment = 0
+
+[node name="Choice4" type="Button" parent="DialoguePanel/VBoxContainer/DialogueContent/ChoicesContainer"]
+layout_mode = 2
+text = "Choice 4"
+visible = false
+alignment = 0
+
+[node name="Choice5" type="Button" parent="DialoguePanel/VBoxContainer/DialogueContent/ChoicesContainer"]
+layout_mode = 2
+text = "Choice 5"
+visible = false
+alignment = 0
+
+[node name="HSeparator2" type="HSeparator" parent="DialoguePanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="ActionButtons" type="HBoxContainer" parent="DialoguePanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="ContinueButton" type="Button" parent="DialoguePanel/VBoxContainer/ActionButtons"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Continue"
+visible = false
+
+[node name="EndButton" type="Button" parent="DialoguePanel/VBoxContainer/ActionButtons"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "End Conversation"
+
+[connection signal="pressed" from="DialoguePanel/VBoxContainer/NPCInfo/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="pressed" from="DialoguePanel/VBoxContainer/ActionButtons/ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="DialoguePanel/VBoxContainer/ActionButtons/EndButton" to="." method="_on_end_button_pressed"]

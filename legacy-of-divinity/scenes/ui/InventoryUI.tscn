@@ -1,0 +1,225 @@
+[gd_scene load_steps=2 format=3 uid="uid://brhy8j4x5lpdk"]
+
+[ext_resource type="Script" path="res://scripts/ui/InventoryUI.gd" id="1_inventory"]
+
+[node name="InventoryUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+visible = false
+script = ExtResource("1_inventory")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 0.7)
+
+[node name="InventoryPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -350.0
+offset_right = 500.0
+offset_bottom = 350.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InventoryPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+
+[node name="Header" type="HBoxContainer" parent="InventoryPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="InventoryPanel/VBoxContainer/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "🎒 Inventory & Equipment"
+theme_type_variation = &"HeaderLarge"
+
+[node name="CloseButton" type="Button" parent="InventoryPanel/VBoxContainer/Header"]
+layout_mode = 2
+text = "❌"
+
+[node name="HSeparator" type="HSeparator" parent="InventoryPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="MainContent" type="HBoxContainer" parent="InventoryPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LeftPanel" type="VBoxContainer" parent="InventoryPanel/VBoxContainer/MainContent"]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_constants/separation = 10
+
+[node name="PlayerStats" type="VBoxContainer" parent="InventoryPanel/VBoxContainer/MainContent/LeftPanel"]
+layout_mode = 2
+
+[node name="StatsTitle" type="Label" parent="InventoryPanel/VBoxContainer/MainContent/LeftPanel/PlayerStats"]
+layout_mode = 2
+text = "⚡ Character Stats"
+theme_type_variation = &"HeaderMedium"
+
+[node name="StatsContainer" type="VBoxContainer" parent="InventoryPanel/VBoxContainer/MainContent/LeftPanel/PlayerStats"]
+layout_mode = 2
+
+[node name="LevelLabel" type="Label" parent="InventoryPanel/VBoxContainer/MainContent/LeftPanel/PlayerStats/StatsContainer"]
+layout_mode = 2
+text = "Level: 1"
+
+[node name="HealthLabel" type="Label" parent="InventoryPanel/VBoxContainer/MainContent/LeftPanel/PlayerStats/StatsContainer"]
+layout_mode = 2
+text = "❤️ Health: 100/100"
+
+[node name="FaithLabel" type="Label" parent="InventoryPanel/VBoxContainer/MainContent/LeftPanel/PlayerStats/StatsContainer"]
+layout_mode = 2
+text = "✨ Faith: 50"
+
+[node name="WisdomLabel" type="Label" parent="InventoryPanel/VBoxContainer/MainContent/LeftPanel/PlayerStats/StatsContainer"]
+layout_mode = 2
+text = "🧠 Wisdom: 50"
+
+[node name="SocialLabel" type="Label" parent="InventoryPanel/VBoxContainer/MainContent/LeftPanel/PlayerStats/StatsContainer"]
+layout_mode = 2
+text = "🗣️ Social: 50"
+
+[node name="GoldLabel" type="Label" parent="InventoryPanel/VBoxContainer/MainContent/LeftPanel/PlayerStats/StatsContainer"]
+layout_mode = 2
+text = "💰 Gold: 100"
+
+[node name="Equipment" type="VBoxContainer" parent="InventoryPanel/VBoxContainer/MainContent/LeftPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="EquipmentTitle" type="Label" parent="InventoryPanel/VBoxContainer/MainContent/LeftPanel/Equipment"]
+layout_mode = 2
+text = "⚔️ Equipment"
+theme_type_variation = &"HeaderMedium"
+
+[node name="EquipmentGrid" type="GridContainer" parent="InventoryPanel/VBoxContainer/MainContent/LeftPanel/Equipment"]
+layout_mode = 2
+columns = 3
+
+[node name="HeadSlot" type="Button" parent="InventoryPanel/VBoxContainer/MainContent/LeftPanel/Equipment/EquipmentGrid"]
+layout_mode = 2
+custom_minimum_size = Vector2(64, 64)
+text = "Head"
+
+[node name="ChestSlot" type="Button" parent="InventoryPanel/VBoxContainer/MainContent/LeftPanel/Equipment/EquipmentGrid"]
+layout_mode = 2
+custom_minimum_size = Vector2(64, 64)
+text = "Chest"
+
+[node name="LegsSlot" type="Button" parent="InventoryPanel/VBoxContainer/MainContent/LeftPanel/Equipment/EquipmentGrid"]
+layout_mode = 2
+custom_minimum_size = Vector2(64, 64)
+text = "Legs"
+
+[node name="WeaponSlot" type="Button" parent="InventoryPanel/VBoxContainer/MainContent/LeftPanel/Equipment/EquipmentGrid"]
+layout_mode = 2
+custom_minimum_size = Vector2(64, 64)
+text = "Weapon"
+
+[node name="ShieldSlot" type="Button" parent="InventoryPanel/VBoxContainer/MainContent/LeftPanel/Equipment/EquipmentGrid"]
+layout_mode = 2
+custom_minimum_size = Vector2(64, 64)
+text = "Shield"
+
+[node name="AccessorySlot" type="Button" parent="InventoryPanel/VBoxContainer/MainContent/LeftPanel/Equipment/EquipmentGrid"]
+layout_mode = 2
+custom_minimum_size = Vector2(64, 64)
+text = "Accessory"
+
+[node name="RightPanel" type="VBoxContainer" parent="InventoryPanel/VBoxContainer/MainContent"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="InventoryTitle" type="Label" parent="InventoryPanel/VBoxContainer/MainContent/RightPanel"]
+layout_mode = 2
+text = "📦 Items"
+theme_type_variation = &"HeaderMedium"
+
+[node name="InventoryTabs" type="TabContainer" parent="InventoryPanel/VBoxContainer/MainContent/RightPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="All Items" type="ScrollContainer" parent="InventoryPanel/VBoxContainer/MainContent/RightPanel/InventoryTabs"]
+layout_mode = 2
+
+[node name="ItemGrid" type="GridContainer" parent="InventoryPanel/VBoxContainer/MainContent/RightPanel/InventoryTabs/All Items"]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 6
+
+[node name="Consumables" type="ScrollContainer" parent="InventoryPanel/VBoxContainer/MainContent/RightPanel/InventoryTabs"]
+visible = false
+layout_mode = 2
+
+[node name="ConsumableGrid" type="GridContainer" parent="InventoryPanel/VBoxContainer/MainContent/RightPanel/InventoryTabs/Consumables"]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 6
+
+[node name="Equipment" type="ScrollContainer" parent="InventoryPanel/VBoxContainer/MainContent/RightPanel/InventoryTabs"]
+visible = false
+layout_mode = 2
+
+[node name="EquipGrid" type="GridContainer" parent="InventoryPanel/VBoxContainer/MainContent/RightPanel/InventoryTabs/Equipment"]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 6
+
+[node name="Materials" type="ScrollContainer" parent="InventoryPanel/VBoxContainer/MainContent/RightPanel/InventoryTabs"]
+visible = false
+layout_mode = 2
+
+[node name="MaterialGrid" type="GridContainer" parent="InventoryPanel/VBoxContainer/MainContent/RightPanel/InventoryTabs/Materials"]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 6
+
+[node name="ItemDetails" type="VBoxContainer" parent="InventoryPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="DetailTitle" type="Label" parent="InventoryPanel/VBoxContainer/ItemDetails"]
+layout_mode = 2
+text = "Select an item to see details"
+theme_type_variation = &"HeaderMedium"
+
+[node name="DetailText" type="RichTextLabel" parent="InventoryPanel/VBoxContainer/ItemDetails"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 80)
+bbcode_enabled = true
+text = "Item description will appear here."
+
+[node name="ActionButtons" type="HBoxContainer" parent="InventoryPanel/VBoxContainer/ItemDetails"]
+layout_mode = 2
+
+[node name="UseButton" type="Button" parent="InventoryPanel/VBoxContainer/ItemDetails/ActionButtons"]
+layout_mode = 2
+text = "Use"
+disabled = true
+
+[node name="EquipButton" type="Button" parent="InventoryPanel/VBoxContainer/ItemDetails/ActionButtons"]
+layout_mode = 2
+text = "Equip"
+disabled = true
+
+[node name="DropButton" type="Button" parent="InventoryPanel/VBoxContainer/ItemDetails/ActionButtons"]
+layout_mode = 2
+text = "Drop"
+disabled = true
+
+[connection signal="pressed" from="InventoryPanel/VBoxContainer/Header/CloseButton" to="." method="_on_close_button_pressed"]

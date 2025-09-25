@@ -1,9 +1,9 @@
 63f7b34db8d8cdea90c76aacccf841ec
-::res://::1758822761
+::res://::1758823764
 ASSET_IMPORT_GUIDE.md::TextFile::-1::1758814610::0::1::::<><><>0<>0<><>::
-icon.svg::CompressedTexture2D::1480391820935918985::1758766333::1758822762::1::::<><><>0<>0<>0db81b585b0c34b93f2ee6e025c5a4b4<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
+icon.svg::CompressedTexture2D::1480391820935918985::1758766333::1758823765::1::::<><><>0<>0<>0db81b585b0c34b93f2ee6e025c5a4b4<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
 README.md::TextFile::-1::1758765867::0::1::::<><><>0<>0<><>::
-Screenshot 2025-09-25 133408.png::CompressedTexture2D::6478935175326148499::1758821691::1758822762::1::::<><><>0<>0<>2ff2dafae3fd81d9d9de28b060956a3b<>res://.godot/imported/Screenshot 2025-09-25 133408.png-163fa50ad6cbb83b1004f6c1f21dbbd7.ctex::
+Screenshot 2025-09-25 133408.png::CompressedTexture2D::6478935175326148499::1758821691::1758823766::1::::<><><>0<>0<>2ff2dafae3fd81d9d9de28b060956a3b<>res://.godot/imported/Screenshot 2025-09-25 133408.png-163fa50ad6cbb83b1004f6c1f21dbbd7.ctex::
 ::res://assets/::1758815205
 ::res://assets/audio/::1758815205
 ::res://assets/audio/music/::1758815291
@@ -46,12 +46,15 @@ MultiplayerMenu.tscn::PackedScene::3531103073195625126::1758766377::0::1::::<><>
 BiblicalWorld.tscn::PackedScene::-1::1758819293::0::1::::<><><>0<>0<><>::res://scripts/world/GameWorld.gd<>res://scripts/player/PlayerController.gd
 GameWorld.tscn::PackedScene::3355787100761399451::1758813506::0::1::::<><><>0<>0<><>::res://scripts/world/GameWorld.gd<>res://scripts/player/PlayerController.gd
 ::res://scripts/::1758765590
-::res://scripts/autoload/::1758810589
+::res://scripts/autoload/::1758823646
+DialogueSystem.gd::GDScript::577053024739644860::1758823486::0::1::::<>Node<><>0<>0<><>::
 GameManager.gd::GDScript::6224378588197853226::1758809369::0::1::::<>Node<><>0<>0<><>::
+InventorySystem.gd::GDScript::6220377102779043544::1758823299::0::1::::<>Node<><>0<>0<><>::
 LegacySystem.gd::GDScript::3295411772169938317::1758802592::0::1::::<>Node<><>0<>0<><>::
 Logger.gd::GDScript::8218636689875624313::1758808514::0::1::::<>Node<><>0<>0<><>::
 NetworkManager.gd::GDScript::7384870139524247967::1758765605::0::1::::<>Node<><>0<>0<><>::
-PlayerData.gd::GDScript::7167647654681019507::1758810589::0::1::::<>Node<><>0<>0<><>::
+PlayerData.gd::GDScript::7167647654681019507::1758823509::0::1::::<>Node<><>0<>0<><>::
+WorldData.gd::GDScript::400276052278736360::1758823139::0::1::::<>Node<><>0<>0<><>::
 ::res://scripts/legacy/::1758765590
 ::res://scripts/networking/::1758765590
 ::res://scripts/player/::1758815729

@@ -1,0 +1,552 @@
+[gd_scene load_steps=35 format=3 uid="uid://biblical_game_world"]
+
+[ext_resource type="Script" path="res://scripts/world/GameWorld.gd" id="1_gameworld"]
+[ext_resource type="Script" path="res://scripts/player/PlayerController.gd" id="2_player"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_player"]
+radius = 0.4
+height = 1.7
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
+radius = 0.4
+height = 1.7
+
+[sub_resource type="StandardMaterial3D" id="Material_robe"]
+albedo_color = Color(0.8, 0.7, 0.5, 1.0)
+roughness = 0.8
+normal_scale = 0.5
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_courtyard"]
+size = Vector2(100, 100)
+subdivide_width = 20
+subdivide_depth = 20
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_courtyard"]
+size = Vector3(100, 0.5, 100)
+
+[sub_resource type="StandardMaterial3D" id="Material_sandstone_floor"]
+albedo_color = Color(0.9, 0.8, 0.65, 1.0)
+roughness = 0.9
+metallic = 0.0
+normal_scale = 0.8
+heightmap_scale = 0.05
+heightmap_deep_parallax = true
+distance_fade_mode = 1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_column_base"]
+top_radius = 1.8
+bottom_radius = 2.0
+height = 1.0
+cap_top = true
+cap_bottom = true
+radial_segments = 16
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_column_shaft"]
+top_radius = 1.4
+bottom_radius = 1.4
+height = 8.0
+cap_top = false
+cap_bottom = false
+radial_segments = 16
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_column_capital"]
+top_radius = 2.2
+bottom_radius = 1.4
+height = 1.5
+cap_top = true
+cap_bottom = false
+radial_segments = 16
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_column"]
+top_radius = 1.8
+bottom_radius = 2.0
+height = 10.5
+
+[sub_resource type="StandardMaterial3D" id="Material_white_marble"]
+albedo_color = Color(0.98, 0.96, 0.92, 1.0)
+roughness = 0.15
+metallic = 0.05
+normal_scale = 0.3
+clearcoat_enabled = true
+clearcoat_roughness = 0.1
+
+[sub_resource type="StandardMaterial3D" id="Material_gold_capital"]
+albedo_color = Color(1.0, 0.84, 0.0, 1.0)
+roughness = 0.1
+metallic = 0.95
+clearcoat_enabled = true
+clearcoat_roughness = 0.05
+
+[sub_resource type="BoxMesh" id="BoxMesh_altar"]
+size = Vector3(6, 2, 3)
+subdivide_width = 2
+subdivide_height = 1
+subdivide_depth = 1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_altar"]
+size = Vector3(6, 2, 3)
+
+[sub_resource type="StandardMaterial3D" id="Material_gold_altar"]
+albedo_color = Color(1.0, 0.84, 0.0, 1.0)
+roughness = 0.08
+metallic = 0.98
+clearcoat_enabled = true
+clearcoat_roughness = 0.02
+grow_amount = 0.01
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_brazier"]
+top_radius = 1.2
+bottom_radius = 0.8
+height = 2.0
+radial_segments = 12
+
+[sub_resource type="StandardMaterial3D" id="Material_bronze"]
+albedo_color = Color(0.8, 0.5, 0.2, 1.0)
+roughness = 0.3
+metallic = 0.85
+normal_scale = 0.4
+
+[sub_resource type="BoxMesh" id="BoxMesh_temple_wall"]
+size = Vector3(2, 12, 40)
+subdivide_width = 1
+subdivide_height = 6
+subdivide_depth = 20
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_temple_wall"]
+size = Vector3(2, 12, 40)
+
+[sub_resource type="StandardMaterial3D" id="Material_limestone_wall"]
+albedo_color = Color(0.85, 0.78, 0.65, 1.0)
+roughness = 0.8
+normal_scale = 0.6
+heightmap_scale = 0.08
+
+[sub_resource type="SphereMesh" id="SphereMesh_incense"]
+radius = 0.3
+height = 0.6
+radial_segments = 8
+rings = 4
+
+[sub_resource type="StandardMaterial3D" id="Material_clay"]
+albedo_color = Color(0.7, 0.5, 0.3, 1.0)
+roughness = 0.9
+
+[sub_resource type="BoxMesh" id="BoxMesh_steps"]
+size = Vector3(20, 0.5, 2)
+
+[sub_resource type="StandardMaterial3D" id="Material_marble_steps"]
+albedo_color = Color(0.92, 0.88, 0.82, 1.0)
+roughness = 0.3
+metallic = 0.1
+
+[sub_resource type="Environment" id="Environment_biblical_enhanced"]
+background_mode = 1
+background_color = Color(0.95, 0.88, 0.75, 1.0)
+ambient_light_source = 2
+ambient_light_color = Color(1, 0.95, 0.8, 1.0)
+ambient_light_energy = 0.4
+sky_rotation = Vector3(0, 0.3, 0)
+fog_enabled = true
+fog_light_color = Color(1, 0.9, 0.7, 1.0)
+fog_light_energy = 0.8
+fog_sun_scatter = 0.1
+fog_density = 0.01
+fog_height = 5.0
+fog_height_density = 0.1
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_incense"]
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 0.5
+initial_velocity_max = 1.5
+gravity = Vector3(0, -0.2, 0)
+scale_min = 0.1
+scale_max = 0.3
+color = Color(0.8, 0.8, 0.9, 0.6)
+
+[sub_resource type="SphereMesh" id="SphereMesh_particle"]
+radius = 0.05
+height = 0.1
+radial_segments = 4
+rings = 2
+
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_wind"]
+mix_rate = 22050.0
+buffer_length = 0.5
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_flames"]
+
+[sub_resource type="Animation" id="Animation_flame_flicker"]
+resource_name = "flame_flicker"
+length = 2.0
+loop_mode = 1
+
+[node name="BiblicalWorld" type="Node3D"]
+script = ExtResource("1_gameworld")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_biblical_enhanced")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, -0.75, 0.433013, 0, 30, 0)
+light_energy = 2.2
+shadow_enabled = true
+directional_shadow_max_distance = 150.0
+directional_shadow_blend_splits = true
+
+[node name="Temple" type="Node3D" parent="."]
+
+[node name="Courtyard" type="StaticBody3D" parent="Temple"]
+
+[node name="CourtyardMesh" type="MeshInstance3D" parent="Temple/Courtyard"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("PlaneMesh_courtyard")
+surface_material_override/0 = SubResource("Material_sandstone_floor")
+
+[node name="CourtyardCollision" type="CollisionShape3D" parent="Temple/Courtyard"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+shape = SubResource("BoxShape3D_courtyard")
+
+[node name="OuterColumns" type="Node3D" parent="Temple"]
+
+[node name="Column1" type="StaticBody3D" parent="Temple/OuterColumns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, -20)
+
+[node name="ColumnBase" type="MeshInstance3D" parent="Temple/OuterColumns/Column1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("CylinderMesh_column_base")
+surface_material_override/0 = SubResource("Material_white_marble")
+
+[node name="ColumnShaft" type="MeshInstance3D" parent="Temple/OuterColumns/Column1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+mesh = SubResource("CylinderMesh_column_shaft")
+surface_material_override/0 = SubResource("Material_white_marble")
+
+[node name="ColumnCapital" type="MeshInstance3D" parent="Temple/OuterColumns/Column1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.75, 0)
+mesh = SubResource("CylinderMesh_column_capital")
+surface_material_override/0 = SubResource("Material_gold_capital")
+
+[node name="ColumnCollision" type="CollisionShape3D" parent="Temple/OuterColumns/Column1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.25, 0)
+shape = SubResource("CylinderShape3D_column")
+
+[node name="Column2" type="StaticBody3D" parent="Temple/OuterColumns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, -20)
+
+[node name="ColumnBase" type="MeshInstance3D" parent="Temple/OuterColumns/Column2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("CylinderMesh_column_base")
+surface_material_override/0 = SubResource("Material_white_marble")
+
+[node name="ColumnShaft" type="MeshInstance3D" parent="Temple/OuterColumns/Column2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+mesh = SubResource("CylinderMesh_column_shaft")
+surface_material_override/0 = SubResource("Material_white_marble")
+
+[node name="ColumnCapital" type="MeshInstance3D" parent="Temple/OuterColumns/Column2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.75, 0)
+mesh = SubResource("CylinderMesh_column_capital")
+surface_material_override/0 = SubResource("Material_gold_capital")
+
+[node name="ColumnCollision" type="CollisionShape3D" parent="Temple/OuterColumns/Column2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.25, 0)
+shape = SubResource("CylinderShape3D_column")
+
+[node name="Column3" type="StaticBody3D" parent="Temple/OuterColumns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, 20)
+
+[node name="ColumnBase" type="MeshInstance3D" parent="Temple/OuterColumns/Column3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("CylinderMesh_column_base")
+surface_material_override/0 = SubResource("Material_white_marble")
+
+[node name="ColumnShaft" type="MeshInstance3D" parent="Temple/OuterColumns/Column3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+mesh = SubResource("CylinderMesh_column_shaft")
+surface_material_override/0 = SubResource("Material_white_marble")
+
+[node name="ColumnCapital" type="MeshInstance3D" parent="Temple/OuterColumns/Column3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.75, 0)
+mesh = SubResource("CylinderMesh_column_capital")
+surface_material_override/0 = SubResource("Material_gold_capital")
+
+[node name="ColumnCollision" type="CollisionShape3D" parent="Temple/OuterColumns/Column3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.25, 0)
+shape = SubResource("CylinderShape3D_column")
+
+[node name="Column4" type="StaticBody3D" parent="Temple/OuterColumns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 20)
+
+[node name="ColumnBase" type="MeshInstance3D" parent="Temple/OuterColumns/Column4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("CylinderMesh_column_base")
+surface_material_override/0 = SubResource("Material_white_marble")
+
+[node name="ColumnShaft" type="MeshInstance3D" parent="Temple/OuterColumns/Column4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+mesh = SubResource("CylinderMesh_column_shaft")
+surface_material_override/0 = SubResource("Material_white_marble")
+
+[node name="ColumnCapital" type="MeshInstance3D" parent="Temple/OuterColumns/Column4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.75, 0)
+mesh = SubResource("CylinderMesh_column_capital")
+surface_material_override/0 = SubResource("Material_gold_capital")
+
+[node name="ColumnCollision" type="CollisionShape3D" parent="Temple/OuterColumns/Column4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.25, 0)
+shape = SubResource("CylinderShape3D_column")
+
+[node name="InnerColumns" type="Node3D" parent="Temple"]
+
+[node name="Column5" type="StaticBody3D" parent="Temple/InnerColumns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -10)
+
+[node name="ColumnBase" type="MeshInstance3D" parent="Temple/InnerColumns/Column5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("CylinderMesh_column_base")
+surface_material_override/0 = SubResource("Material_white_marble")
+
+[node name="ColumnShaft" type="MeshInstance3D" parent="Temple/InnerColumns/Column5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+mesh = SubResource("CylinderMesh_column_shaft")
+surface_material_override/0 = SubResource("Material_white_marble")
+
+[node name="ColumnCapital" type="MeshInstance3D" parent="Temple/InnerColumns/Column5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.75, 0)
+mesh = SubResource("CylinderMesh_column_capital")
+surface_material_override/0 = SubResource("Material_gold_capital")
+
+[node name="ColumnCollision" type="CollisionShape3D" parent="Temple/InnerColumns/Column5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.25, 0)
+shape = SubResource("CylinderShape3D_column")
+
+[node name="Column6" type="StaticBody3D" parent="Temple/InnerColumns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -10)
+
+[node name="ColumnBase" type="MeshInstance3D" parent="Temple/InnerColumns/Column6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("CylinderMesh_column_base")
+surface_material_override/0 = SubResource("Material_white_marble")
+
+[node name="ColumnShaft" type="MeshInstance3D" parent="Temple/InnerColumns/Column6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+mesh = SubResource("CylinderMesh_column_shaft")
+surface_material_override/0 = SubResource("Material_white_marble")
+
+[node name="ColumnCapital" type="MeshInstance3D" parent="Temple/InnerColumns/Column6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.75, 0)
+mesh = SubResource("CylinderMesh_column_capital")
+surface_material_override/0 = SubResource("Material_gold_capital")
+
+[node name="ColumnCollision" type="CollisionShape3D" parent="Temple/InnerColumns/Column6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.25, 0)
+shape = SubResource("CylinderShape3D_column")
+
+[node name="HolyOfHolies" type="Node3D" parent="Temple"]
+
+[node name="GoldenAltar" type="StaticBody3D" parent="Temple/HolyOfHolies"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -8)
+
+[node name="AltarMesh" type="MeshInstance3D" parent="Temple/HolyOfHolies/GoldenAltar"]
+mesh = SubResource("BoxMesh_altar")
+surface_material_override/0 = SubResource("Material_gold_altar")
+
+[node name="AltarCollision" type="CollisionShape3D" parent="Temple/HolyOfHolies/GoldenAltar"]
+shape = SubResource("BoxShape3D_altar")
+
+[node name="IncenseBrazier1" type="MeshInstance3D" parent="Temple/HolyOfHolies"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 1, 0)
+mesh = SubResource("CylinderMesh_brazier")
+surface_material_override/0 = SubResource("Material_bronze")
+
+[node name="IncenseSmoke1" type="GPUParticles3D" parent="Temple/HolyOfHolies/IncenseBrazier1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+emitting = true
+amount = 50
+lifetime = 8.0
+process_material = SubResource("ParticleProcessMaterial_incense")
+draw_pass_1 = SubResource("SphereMesh_particle")
+
+[node name="IncenseBrazier2" type="MeshInstance3D" parent="Temple/HolyOfHolies"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 1, 0)
+mesh = SubResource("CylinderMesh_brazier")
+surface_material_override/0 = SubResource("Material_bronze")
+
+[node name="IncenseSmoke2" type="GPUParticles3D" parent="Temple/HolyOfHolies/IncenseBrazier2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+emitting = true
+amount = 50
+lifetime = 8.0
+process_material = SubResource("ParticleProcessMaterial_incense")
+draw_pass_1 = SubResource("SphereMesh_particle")
+
+[node name="TempleWalls" type="Node3D" parent="Temple"]
+
+[node name="WallNorth" type="StaticBody3D" parent="Temple/TempleWalls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -35)
+
+[node name="WallMesh" type="MeshInstance3D" parent="Temple/TempleWalls/WallNorth"]
+mesh = SubResource("BoxMesh_temple_wall")
+surface_material_override/0 = SubResource("Material_limestone_wall")
+
+[node name="WallCollision" type="CollisionShape3D" parent="Temple/TempleWalls/WallNorth"]
+shape = SubResource("BoxShape3D_temple_wall")
+
+[node name="Steps" type="StaticBody3D" parent="Temple"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 30)
+
+[node name="Step1" type="MeshInstance3D" parent="Temple/Steps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_steps")
+surface_material_override/0 = SubResource("Material_marble_steps")
+
+[node name="Step2" type="MeshInstance3D" parent="Temple/Steps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -2)
+mesh = SubResource("BoxMesh_steps")
+surface_material_override/0 = SubResource("Material_marble_steps")
+
+[node name="Step3" type="MeshInstance3D" parent="Temple/Steps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -4)
+mesh = SubResource("BoxMesh_steps")
+surface_material_override/0 = SubResource("Material_marble_steps")
+
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 35)
+script = ExtResource("2_player")
+
+[node name="PlayerMesh" type="MeshInstance3D" parent="Player"]
+mesh = SubResource("CapsuleMesh_player")
+surface_material_override/0 = SubResource("Material_robe")
+
+[node name="PlayerCollision" type="CollisionShape3D" parent="Player"]
+shape = SubResource("CapsuleShape3D_player")
+
+[node name="CameraPivot" type="Node3D" parent="Player"]
+
+[node name="Camera3D" type="Camera3D" parent="Player/CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 1.5, 3)
+
+[node name="AmbientAudio" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+stream = SubResource("AudioStreamGenerator_wind")
+volume_db = -15.0
+autoplay = true
+max_distance = 50.0
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="HUD" type="Control" parent="UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="StatsPanel" type="Panel" parent="UI/HUD"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = -200.0
+offset_right = 350.0
+offset_bottom = -15.0
+modulate = Color(1, 1, 1, 0.95)
+
+[node name="StatsContainer" type="VBoxContainer" parent="UI/HUD/StatsPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+
+[node name="NameLabel" type="Label" parent="UI/HUD/StatsPanel/StatsContainer"]
+layout_mode = 2
+text = "Character Name"
+horizontal_alignment = 1
+
+[node name="ClassLabel" type="Label" parent="UI/HUD/StatsPanel/StatsContainer"]
+layout_mode = 2
+text = "Class: Pilgrim"
+
+[node name="HSeparator" type="HSeparator" parent="UI/HUD/StatsPanel/StatsContainer"]
+layout_mode = 2
+
+[node name="HealthLabel" type="Label" parent="UI/HUD/StatsPanel/StatsContainer"]
+layout_mode = 2
+text = "Health: 100/100"
+
+[node name="AlignmentLabel" type="Label" parent="UI/HUD/StatsPanel/StatsContainer"]
+layout_mode = 2
+text = "Alignment: Neutral"
+
+[node name="LevelLabel" type="Label" parent="UI/HUD/StatsPanel/StatsContainer"]
+layout_mode = 2
+text = "Level: 1"
+
+[node name="GenerationLabel" type="Label" parent="UI/HUD/StatsPanel/StatsContainer"]
+layout_mode = 2
+text = "Generation: 1"
+
+[node name="TestChoiceButton" type="Button" parent="UI/HUD"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -220.0
+offset_top = 25.0
+offset_right = -25.0
+offset_bottom = 70.0
+text = "🙏 Make Moral Choice"
+
+[node name="LocationLabel" type="Label" parent="UI/HUD"]
+layout_mode = 1
+anchors_preset = 0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_top = 25.0
+offset_right = 200.0
+offset_bottom = 70.0
+text = "🏛️ Solomon's Temple - Sacred Courtyard"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InstructionsPanel" type="Panel" parent="UI/HUD"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -280.0
+offset_top = -180.0
+offset_right = -25.0
+offset_bottom = -25.0
+modulate = Color(1, 1, 1, 0.9)
+
+[node name="InstructionsLabel" type="Label" parent="UI/HUD/InstructionsPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = 15.0
+offset_right = -15.0
+offset_bottom = -15.0
+text = "🏛️ Temple Controls:
+
+⌨️ WASD - Walk the sacred grounds
+🖱️ Mouse - Observe the temple
+⏸️ Space - Jump over obstacles
+🔄 ESC - Free/capture cursor
+🙏 C - Face a moral choice
+📿 Approach altar to pray
+✨ Watch the incense rise"
+vertical_alignment = 1

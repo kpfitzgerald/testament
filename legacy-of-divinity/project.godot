@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+Logger="*res://scripts/autoload/Logger.gd"
 GameManager="*res://scripts/autoload/GameManager.gd"
 NetworkManager="*res://scripts/autoload/NetworkManager.gd"
 PlayerData="*res://scripts/autoload/PlayerData.gd"

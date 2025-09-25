@@ -166,10 +166,25 @@ func load_player_data():
 			selected_class = save_data.get("selected_class", "")
 			selected_background = save_data.get("selected_background", "")
 			character_appearance = save_data.get("character_appearance", {})
-			moral_choices = save_data.get("moral_choices", [])
-			completed_quests = save_data.get("completed_quests", [])
-			active_quests = save_data.get("active_quests", [])
-			ancestor_data = save_data.get("ancestor_data", [])
+			var loaded_moral_choices = save_data.get("moral_choices", [])
+			moral_choices.clear()
+			for choice in loaded_moral_choices:
+				moral_choices.append(choice)
+
+			var loaded_completed_quests = save_data.get("completed_quests", [])
+			completed_quests.clear()
+			for quest in loaded_completed_quests:
+				completed_quests.append(quest)
+
+			var loaded_active_quests = save_data.get("active_quests", [])
+			active_quests.clear()
+			for quest in loaded_active_quests:
+				active_quests.append(quest)
+
+			var loaded_ancestor_data = save_data.get("ancestor_data", [])
+			ancestor_data.clear()
+			for ancestor in loaded_ancestor_data:
+				ancestor_data.append(ancestor)
 			legacy_bonuses = save_data.get("legacy_bonuses", {})
 
 			print("Player data loaded")

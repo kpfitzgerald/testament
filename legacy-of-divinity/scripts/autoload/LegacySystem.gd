@@ -5,7 +5,7 @@ signal generation_advanced(new_generation)
 # Legacy tracking
 var family_tree: Dictionary = {}
 var generational_bonuses: Dictionary = {}
-var family_reputation: int = 0  # Community standing across generations
+var family_reputation: float = 0.0  # Community standing across generations
 var divine_favor: int = 0  # Accumulated through righteous deeds
 
 # Ancestral influences

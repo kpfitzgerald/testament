@@ -1,6 +1,21 @@
-[gd_scene load_steps=2 format=3 uid="uid://bn2tk8xr4lgdv"]
+[gd_scene load_steps=5 format=3 uid="uid://bn2tk8xr4lgdv"]
 
 [ext_resource type="Script" path="res://scripts/world/GameWorld.gd" id="1_1x4jv"]
+[ext_resource type="Script" path="res://scripts/player/PlayerController.gd" id="2_player"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_1"]
+size = Vector3(40, 2, 40)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1"]
+size = Vector3(40, 2, 40)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_1"]
+radius = 0.5
+height = 1.8
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1"]
+radius = 0.5
+height = 1.8
 
 [node name="GameWorld" type="Node3D"]
 script = ExtResource("1_1x4jv")
@@ -11,24 +26,27 @@ transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -
 [node name="Ground" type="StaticBody3D" parent="."]
 
 [node name="GroundMesh" type="MeshInstance3D" parent="Ground"]
-mesh = BoxMesh.new()
-transform = Transform3D(20, 0, 0, 0, 1, 0, 0, 0, 20, 0, -1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+mesh = SubResource("BoxMesh_1")
 
 [node name="GroundCollision" type="CollisionShape3D" parent="Ground"]
-shape = BoxShape3D.new()
-transform = Transform3D(20, 0, 0, 0, 1, 0, 0, 0, 20, 0, -1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+shape = SubResource("BoxShape3D_1")
 
 [node name="Player" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("2_player")
 
 [node name="PlayerMesh" type="MeshInstance3D" parent="Player"]
-mesh = CapsuleMesh.new()
+mesh = SubResource("CapsuleMesh_1")
 
 [node name="PlayerCollision" type="CollisionShape3D" parent="Player"]
-shape = CapsuleShape3D.new()
+shape = SubResource("CapsuleShape3D_1")
 
-[node name="Camera3D" type="Camera3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 2, 3)
+[node name="CameraPivot" type="Node3D" parent="Player"]
+
+[node name="Camera3D" type="Camera3D" parent="Player/CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 1.5, 3)
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -92,3 +110,21 @@ offset_top = 10.0
 offset_right = -10.0
 offset_bottom = 50.0
 text = "Test Moral Choice"
+
+[node name="InstructionsLabel" type="Label" parent="UI/HUD"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -100.0
+offset_right = -10.0
+offset_bottom = -10.0
+text = "WASD - Move
+Mouse - Look
+Space - Jump
+ESC - Toggle mouse
+Esc (hold) - Main Menu"
+vertical_alignment = 2

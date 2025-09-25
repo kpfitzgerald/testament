@@ -27,6 +27,7 @@ WorldData="*res://scripts/autoload/WorldData.gd"
 InventorySystem="*res://scripts/autoload/InventorySystem.gd"
 DialogueSystem="*res://scripts/autoload/DialogueSystem.gd"
 UIManager="*res://scripts/autoload/UIManager.gd"
+CharacterSlots="*res://scripts/autoload/CharacterSlots.gd"
 
 [display]
 

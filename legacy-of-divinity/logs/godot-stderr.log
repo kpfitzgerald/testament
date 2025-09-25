@@ -1,0 +1,14 @@
+WARNING: Detected another project.godot at res://GodotNPCAI. The folder will be ignored.
+   at: _should_skip_directory (editor/file_system/editor_file_system.cpp:3446)
+WARNING: OBJ: Ambient light for material 'None' is ignored in PBR
+   at: _parse_material_library (editor/import/3d/resource_importer_obj.cpp:60)
+WARNING: OBJ: Ambient light for material 'bark01' is ignored in PBR
+   at: _parse_material_library (editor/import/3d/resource_importer_obj.cpp:60)
+WARNING: OBJ: Ambient light for material 'leaf04' is ignored in PBR
+   at: _parse_material_library (editor/import/3d/resource_importer_obj.cpp:60)
+WARNING: OBJ: Ambient light for material 'leaf06' is ignored in PBR
+   at: _parse_material_library (editor/import/3d/resource_importer_obj.cpp:60)
+WARNING: OBJ: Ambient light for material 'Grass' is ignored in PBR
+   at: _parse_material_library (editor/import/3d/resource_importer_obj.cpp:60)
+ERROR: Failed loading resource: C://Users/Daniel/Desktop/Godot Projects/OpenWorldGame/Procedural Generation/Textures/Grass.jpg.
+   at: _load (core/io/resource_loader.cpp:343)

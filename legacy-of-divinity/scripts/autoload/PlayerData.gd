@@ -283,90 +283,111 @@ func save_player_data():
 		"dialogue_data": DialogueSystem.save_dialogue_data() if DialogueSystem else {}
 	}
 
-	var file = FileAccess.open("user://player_data.json", FileAccess.WRITE)
-	if file:
-		file.store_string(JSON.stringify(save_data))
-		file.close()
-		print("Player data saved")
+	# Use character slot system if available
+	if CharacterSlots:
+		CharacterSlots.save_character_to_slot(CharacterSlots.get_current_slot(), save_data)
+	else:
+		# Fallback to legacy save system
+		var file = FileAccess.open("user://player_data.json", FileAccess.WRITE)
+		if file:
+			file.store_string(JSON.stringify(save_data))
+			file.close()
+			print("Player data saved (legacy)")
 
 func load_player_data():
-	var file = FileAccess.open("user://player_data.json", FileAccess.READ)
-	if file:
-		var json_string = file.get_as_text()
-		file.close()
+	var save_data = {}
 
-		var json = JSON.new()
-		var parse_result = json.parse(json_string)
+	# Use character slot system if available
+	if CharacterSlots:
+		save_data = CharacterSlots.load_character_from_slot(CharacterSlots.get_current_slot())
+		if save_data.is_empty():
+			print("No character data in current slot")
+			return
+	else:
+		# Fallback to legacy load system
+		var file = FileAccess.open("user://player_data.json", FileAccess.READ)
+		if file:
+			var json_string = file.get_as_text()
+			file.close()
 
-		if parse_result == OK:
-			var save_data = json.data
-			player_name = save_data.get("player_name", "")
-			player_id = save_data.get("player_id", "")
-			generation = save_data.get("generation", 1)
-			moral_alignment = save_data.get("moral_alignment", 0)
-			level = save_data.get("level", 1)
-			experience = save_data.get("experience", 0)
-			health = save_data.get("health", 100)
-			max_health = save_data.get("max_health", 100)
-			faith_points = save_data.get("faith_points", 50)
-			wisdom_points = save_data.get("wisdom_points", 50)
-			social_skills = save_data.get("social_skills", 50)
-			skills = save_data.get("skills", {
-				"faith": {"level": 1, "experience": 0, "max_level": 100},
-				"wisdom": {"level": 1, "experience": 0, "max_level": 100},
-				"social": {"level": 1, "experience": 0, "max_level": 100},
-				"crafting": {"level": 1, "experience": 0, "max_level": 100},
-				"trading": {"level": 1, "experience": 0, "max_level": 100},
-				"healing": {"level": 1, "experience": 0, "max_level": 100},
-				"combat": {"level": 1, "experience": 0, "max_level": 100},
-				"leadership": {"level": 1, "experience": 0, "max_level": 100}
-			})
-			attributes = save_data.get("attributes", {
-				"strength": 10,
-				"intelligence": 10,
-				"charisma": 10,
-				"spirit": 10,
-				"endurance": 10
-			})
-			skill_points = save_data.get("skill_points", 0)
-			attribute_points = save_data.get("attribute_points", 0)
-			selected_class = save_data.get("selected_class", "")
-			selected_background = save_data.get("selected_background", "")
-			character_appearance = save_data.get("character_appearance", {})
-			var loaded_moral_choices = save_data.get("moral_choices", [])
-			moral_choices.clear()
-			for choice in loaded_moral_choices:
-				moral_choices.append(choice)
-
-			var loaded_completed_quests = save_data.get("completed_quests", [])
-			completed_quests.clear()
-			for quest in loaded_completed_quests:
-				completed_quests.append(quest)
-
-			var loaded_active_quests = save_data.get("active_quests", [])
-			active_quests.clear()
-			for quest in loaded_active_quests:
-				active_quests.append(quest)
-
-			var loaded_ancestor_data = save_data.get("ancestor_data", [])
-			ancestor_data.clear()
-			for ancestor in loaded_ancestor_data:
-				ancestor_data.append(ancestor)
-			legacy_bonuses = save_data.get("legacy_bonuses", {})
-
-			# Load inventory data
-			var inventory_data = save_data.get("inventory_data", {})
-			if InventorySystem and not inventory_data.is_empty():
-				InventorySystem.load_inventory_data(inventory_data)
-
-			# Load dialogue data
-			var dialogue_data = save_data.get("dialogue_data", {})
-			if DialogueSystem and not dialogue_data.is_empty():
-				DialogueSystem.load_dialogue_data(dialogue_data)
-
-			print("Player data loaded")
+			var json = JSON.new()
+			var parse_result = json.parse(json_string)
+			if parse_result == OK:
+				save_data = json.data
+			else:
+				print("Failed to parse player data")
+				return
 		else:
-			print("Failed to parse player data")
+			print("No save data found")
+			return
+
+	# Load data from save_data dictionary
+	player_name = save_data.get("player_name", "")
+	player_id = save_data.get("player_id", "")
+	generation = save_data.get("generation", 1)
+	moral_alignment = save_data.get("moral_alignment", 0)
+	level = save_data.get("level", 1)
+	experience = save_data.get("experience", 0)
+	health = save_data.get("health", 100)
+	max_health = save_data.get("max_health", 100)
+	faith_points = save_data.get("faith_points", 50)
+	wisdom_points = save_data.get("wisdom_points", 50)
+	social_skills = save_data.get("social_skills", 50)
+	skills = save_data.get("skills", {
+		"faith": {"level": 1, "experience": 0, "max_level": 100},
+		"wisdom": {"level": 1, "experience": 0, "max_level": 100},
+		"social": {"level": 1, "experience": 0, "max_level": 100},
+		"crafting": {"level": 1, "experience": 0, "max_level": 100},
+		"trading": {"level": 1, "experience": 0, "max_level": 100},
+		"healing": {"level": 1, "experience": 0, "max_level": 100},
+		"combat": {"level": 1, "experience": 0, "max_level": 100},
+		"leadership": {"level": 1, "experience": 0, "max_level": 100}
+	})
+	attributes = save_data.get("attributes", {
+		"strength": 10,
+		"intelligence": 10,
+		"charisma": 10,
+		"spirit": 10,
+		"endurance": 10
+	})
+	skill_points = save_data.get("skill_points", 0)
+	attribute_points = save_data.get("attribute_points", 0)
+	selected_class = save_data.get("selected_class", "")
+	selected_background = save_data.get("selected_background", "")
+	character_appearance = save_data.get("character_appearance", {})
+
+	var loaded_moral_choices = save_data.get("moral_choices", [])
+	moral_choices.clear()
+	for choice in loaded_moral_choices:
+		moral_choices.append(choice)
+
+	var loaded_completed_quests = save_data.get("completed_quests", [])
+	completed_quests.clear()
+	for quest in loaded_completed_quests:
+		completed_quests.append(quest)
+
+	var loaded_active_quests = save_data.get("active_quests", [])
+	active_quests.clear()
+	for quest in loaded_active_quests:
+		active_quests.append(quest)
+
+	var loaded_ancestor_data = save_data.get("ancestor_data", [])
+	ancestor_data.clear()
+	for ancestor in loaded_ancestor_data:
+		ancestor_data.append(ancestor)
+	legacy_bonuses = save_data.get("legacy_bonuses", {})
+
+	# Load inventory data
+	var inventory_data = save_data.get("inventory_data", {})
+	if InventorySystem and not inventory_data.is_empty():
+		InventorySystem.load_inventory_data(inventory_data)
+
+	# Load dialogue data
+	var dialogue_data = save_data.get("dialogue_data", {})
+	if DialogueSystem and not dialogue_data.is_empty():
+		DialogueSystem.load_dialogue_data(dialogue_data)
+
+	print("Player data loaded")
 
 func generate_player_id() -> String:
 	var timestamp = str(Time.get_unix_time_from_system())

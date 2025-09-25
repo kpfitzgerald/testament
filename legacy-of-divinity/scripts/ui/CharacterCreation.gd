@@ -266,6 +266,11 @@ func _on_create_button_pressed():
 		PlayerData.create_new_character(character_data)
 		print("Character created successfully")
 
+		# Update character slot metadata
+		if CharacterSlots:
+			var current_slot = CharacterSlots.get_current_slot()
+			CharacterSlots.create_character_in_slot(current_slot, character_name, selected_class)
+
 	get_tree().change_scene_to_file("res://scenes/world/BiblicalWorld.tscn")
 
 func _on_back_button_pressed():

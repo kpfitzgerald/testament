@@ -149,9 +149,15 @@ if ($godotExe) {
         Set-Location $ProjectPath
 
         if ($Background) {
-            # Launch in background without waiting
-            $process = Start-Process -FilePath $godotExe -ArgumentList "--editor", "--path", $ProjectPath -PassThru -WindowStyle Normal
+            # Create separate log files for stdout and stderr
+            $godotOutPath = "$LogDir\godot-stdout.log"
+            $godotErrPath = "$LogDir\godot-stderr.log"
+
+            # Launch in background with output redirection to separate files
+            $process = Start-Process -FilePath $godotExe -ArgumentList "--editor", "--path", $ProjectPath -PassThru -WindowStyle Normal -RedirectStandardOutput $godotOutPath -RedirectStandardError $godotErrPath
             Write-LogHost "Godot launched in background (PID: $($process.Id))" "Green"
+            Write-LogHost "Godot stdout: $godotOutPath" "Cyan"
+            Write-LogHost "Godot stderr: $godotErrPath" "Cyan"
             Write-LogHost "Project: Legacy of Divinity" "Cyan"
             Write-LogHost "Script completed - Godot is running in background." "Green"
         } else {

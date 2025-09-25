@@ -35,7 +35,10 @@ func _initialize_ui_systems():
 	await get_tree().process_frame
 
 	print("DEBUG: Attempting to initialize UI systems...")
-	print("DEBUG: Current scene: ", get_tree().current_scene.name if get_tree().current_scene else "null")
+	var scene_name = "null"
+	if get_tree().current_scene:
+		scene_name = get_tree().current_scene.name
+	print("DEBUG: Current scene: ", scene_name)
 
 	# Find the main game scene or create UI container
 	var ui_container = _get_or_create_ui_container()
@@ -183,7 +186,14 @@ func _clear_current_ui(ui_name: String):
 
 	# If there are other UIs in the stack, show the previous one
 	if not ui_stack.is_empty():
-		current_open_ui = ui_stack.back()
+		var previous_ui = ui_stack.back()
+		# Only assign if the previous UI is still valid
+		if is_instance_valid(previous_ui):
+			current_open_ui = previous_ui
+		else:
+			# Remove invalid UI from stack
+			ui_stack.erase(previous_ui)
+			current_open_ui = null
 
 	ui_closed.emit(ui_name)
 

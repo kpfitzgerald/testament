@@ -267,7 +267,7 @@ var dialogue_database: Dictionary = {
 	}
 }
 
-func start_dialogue(npc_id: String, player_node = null):
+func start_dialogue(npc_id: String, _player_node = null):
 	if not dialogue_database.has(npc_id):
 		print("NPC dialogue not found: ", npc_id)
 		return false

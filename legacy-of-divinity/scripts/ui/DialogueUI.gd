@@ -64,10 +64,10 @@ func _on_dialogue_started(npc_id: String):
 	current_npc_id = npc_id
 	_update_npc_info()
 
-func _on_dialogue_ended(npc_id: String):
+func _on_dialogue_ended(_npc_id: String):
 	hide_dialogue()
 
-func _on_dialogue_choice_made(choice_data: Dictionary):
+func _on_dialogue_choice_made(_choice_data: Dictionary):
 	# Update display after choice is made
 	_update_dialogue_display()
 

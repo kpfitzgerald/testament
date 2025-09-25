@@ -78,14 +78,26 @@ func load_world_data():
 			var world_data = json.data
 			world_id = world_data.get("world_id", "biblical_world_main")
 			server_time = world_data.get("server_time", 0.0)
-			world_events = world_data.get("world_events", [])
+			var events_data = world_data.get("world_events", [])
+			world_events.clear()
+			for event in events_data:
+				if event is Dictionary:
+					world_events.append(event)
 			npc_states = world_data.get("npc_states", {})
 			world_objects = world_data.get("world_objects", {})
 			player_interactions = world_data.get("player_interactions", {})
 			temple_donations = world_data.get("temple_donations", 0)
 			community_faith_level = world_data.get("community_faith_level", 50)
-			active_world_quests = world_data.get("active_world_quests", [])
-			completed_world_events = world_data.get("completed_world_events", [])
+			var quests_data = world_data.get("active_world_quests", [])
+			active_world_quests.clear()
+			for quest in quests_data:
+				if quest is Dictionary:
+					active_world_quests.append(quest)
+			var events_completed_data = world_data.get("completed_world_events", [])
+			completed_world_events.clear()
+			for event_id in events_completed_data:
+				if event_id is String:
+					completed_world_events.append(event_id)
 			marketplace_items = world_data.get("marketplace_items", {})
 			weather_state = world_data.get("weather_state", {"type": "clear", "intensity": 0.5})
 			time_of_day = world_data.get("time_of_day", 12.0)
@@ -166,7 +178,7 @@ func _update_world_time():
 	if seasonal_data.day_of_year > 365:
 		seasonal_data.day_of_year = 1
 
-	var season_day = seasonal_data.day_of_year % 365
+	var season_day = int(seasonal_data.day_of_year) % 365
 	if season_day < 91:
 		seasonal_data.season = "spring"
 	elif season_day < 182:
@@ -245,7 +257,7 @@ func add_player_interaction(player_id: String, interaction_data: Dictionary):
 
 func contribute_to_temple(amount: int, player_id: String):
 	temple_donations += amount
-	community_faith_level += amount / 10  # Each donation increases community faith
+	community_faith_level += int(amount / 10.0)  # Each donation increases community faith
 	community_faith_level = min(community_faith_level, 100)
 
 	add_player_interaction(player_id, {

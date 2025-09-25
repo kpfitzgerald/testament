@@ -465,7 +465,11 @@ func save_inventory_data() -> Dictionary:
 	}
 
 func load_inventory_data(data: Dictionary):
-	inventory_items = data.get("inventory_items", [])
+	var items_data = data.get("inventory_items", [])
+	inventory_items.clear()
+	for item in items_data:
+		if item is Dictionary:
+			inventory_items.append(item)
 	equipped_items = data.get("equipped_items", {})
 	gold_coins = data.get("gold_coins", 100)
 	max_inventory_slots = data.get("max_inventory_slots", 30)

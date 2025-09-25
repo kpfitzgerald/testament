@@ -1,0 +1,377 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqry8j4x5lpdk"]
+
+[ext_resource type="Script" path="res://scripts/ui/SkillsUI.gd" id="1_skills"]
+
+[node name="SkillsUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+visible = false
+script = ExtResource("1_skills")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 0.7)
+
+[node name="SkillsPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -600.0
+offset_top = -400.0
+offset_right = 600.0
+offset_bottom = 400.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SkillsPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = 15.0
+offset_right = -15.0
+offset_bottom = -15.0
+
+[node name="Header" type="HBoxContainer" parent="SkillsPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="SkillsPanel/VBoxContainer/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "📈 Skills & Progression"
+theme_type_variation = &"HeaderLarge"
+
+[node name="CloseButton" type="Button" parent="SkillsPanel/VBoxContainer/Header"]
+layout_mode = 2
+text = "❌"
+
+[node name="HSeparator" type="HSeparator" parent="SkillsPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="MainContent" type="HBoxContainer" parent="SkillsPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LeftPanel" type="VBoxContainer" parent="SkillsPanel/VBoxContainer/MainContent"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CharacterOverview" type="VBoxContainer" parent="SkillsPanel/VBoxContainer/MainContent/LeftPanel"]
+layout_mode = 2
+
+[node name="OverviewTitle" type="Label" parent="SkillsPanel/VBoxContainer/MainContent/LeftPanel/CharacterOverview"]
+layout_mode = 2
+text = "👤 Character Overview"
+theme_type_variation = &"HeaderMedium"
+
+[node name="OverviewContainer" type="VBoxContainer" parent="SkillsPanel/VBoxContainer/MainContent/LeftPanel/CharacterOverview"]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="SkillsPanel/VBoxContainer/MainContent/LeftPanel/CharacterOverview/OverviewContainer"]
+layout_mode = 2
+text = "Name: Unknown"
+
+[node name="ClassLabel" type="Label" parent="SkillsPanel/VBoxContainer/MainContent/LeftPanel/CharacterOverview/OverviewContainer"]
+layout_mode = 2
+text = "Class: Pilgrim"
+
+[node name="LevelLabel" type="Label" parent="SkillsPanel/VBoxContainer/MainContent/LeftPanel/CharacterOverview/OverviewContainer"]
+layout_mode = 2
+text = "Level: 1"
+
+[node name="ExperienceLabel" type="Label" parent="SkillsPanel/VBoxContainer/MainContent/LeftPanel/CharacterOverview/OverviewContainer"]
+layout_mode = 2
+text = "Experience: 0/100"
+
+[node name="PowerLevelLabel" type="Label" parent="SkillsPanel/VBoxContainer/MainContent/LeftPanel/CharacterOverview/OverviewContainer"]
+layout_mode = 2
+text = "Power Level: 50"
+
+[node name="MoralAlignmentLabel" type="Label" parent="SkillsPanel/VBoxContainer/MainContent/LeftPanel/CharacterOverview/OverviewContainer"]
+layout_mode = 2
+text = "Moral Alignment: Neutral"
+
+[node name="HSeparator1" type="HSeparator" parent="SkillsPanel/VBoxContainer/MainContent/LeftPanel"]
+layout_mode = 2
+
+[node name="Attributes" type="VBoxContainer" parent="SkillsPanel/VBoxContainer/MainContent/LeftPanel"]
+layout_mode = 2
+
+[node name="AttributesTitle" type="Label" parent="SkillsPanel/VBoxContainer/MainContent/LeftPanel/Attributes"]
+layout_mode = 2
+text = "⚡ Attributes"
+theme_type_variation = &"HeaderMedium"
+
+[node name="AttributePoints" type="Label" parent="SkillsPanel/VBoxContainer/MainContent/LeftPanel/Attributes"]
+layout_mode = 2
+text = "Available Points: 0"
+
+[node name="AttributesContainer" type="VBoxContainer" parent="SkillsPanel/VBoxContainer/MainContent/LeftPanel/Attributes"]
+layout_mode = 2
+
+[node name="StrengthContainer" type="HBoxContainer" parent="SkillsPanel/VBoxContainer/MainContent/LeftPanel/Attributes/AttributesContainer"]
+layout_mode = 2
+
+[node name="StrengthLabel" type="Label" parent="SkillsPanel/VBoxContainer/MainContent/LeftPanel/Attributes/AttributesContainer/StrengthContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "💪 Strength: 10"
+
+[node name="StrengthButton" type="Button" parent="SkillsPanel/VBoxContainer/MainContent/LeftPanel/Attributes/AttributesContainer/StrengthContainer"]
+layout_mode = 2
+text = "+"
+disabled = true
+
+[node name="IntelligenceContainer" type="HBoxContainer" parent="SkillsPanel/VBoxContainer/MainContent/LeftPanel/Attributes/AttributesContainer"]
+layout_mode = 2
+
+[node name="IntelligenceLabel" type="Label" parent="SkillsPanel/VBoxContainer/MainContent/LeftPanel/Attributes/AttributesContainer/IntelligenceContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "🧠 Intelligence: 10"
+
+[node name="IntelligenceButton" type="Button" parent="SkillsPanel/VBoxContainer/MainContent/LeftPanel/Attributes/AttributesContainer/IntelligenceContainer"]
+layout_mode = 2
+text = "+"
+disabled = true
+
+[node name="CharismaContainer" type="HBoxContainer" parent="SkillsPanel/VBoxContainer/MainContent/LeftPanel/Attributes/AttributesContainer"]
+layout_mode = 2
+
+[node name="CharismaLabel" type="Label" parent="SkillsPanel/VBoxContainer/MainContent/LeftPanel/Attributes/AttributesContainer/CharismaContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "🗣️ Charisma: 10"
+
+[node name="CharismaButton" type="Button" parent="SkillsPanel/VBoxContainer/MainContent/LeftPanel/Attributes/AttributesContainer/CharismaContainer"]
+layout_mode = 2
+text = "+"
+disabled = true
+
+[node name="SpiritContainer" type="HBoxContainer" parent="SkillsPanel/VBoxContainer/MainContent/LeftPanel/Attributes/AttributesContainer"]
+layout_mode = 2
+
+[node name="SpiritLabel" type="Label" parent="SkillsPanel/VBoxContainer/MainContent/LeftPanel/Attributes/AttributesContainer/SpiritContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "✨ Spirit: 10"
+
+[node name="SpiritButton" type="Button" parent="SkillsPanel/VBoxContainer/MainContent/LeftPanel/Attributes/AttributesContainer/SpiritContainer"]
+layout_mode = 2
+text = "+"
+disabled = true
+
+[node name="EnduranceContainer" type="HBoxContainer" parent="SkillsPanel/VBoxContainer/MainContent/LeftPanel/Attributes/AttributesContainer"]
+layout_mode = 2
+
+[node name="EnduranceLabel" type="Label" parent="SkillsPanel/VBoxContainer/MainContent/LeftPanel/Attributes/AttributesContainer/EnduranceContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "🛡️ Endurance: 10"
+
+[node name="EnduranceButton" type="Button" parent="SkillsPanel/VBoxContainer/MainContent/LeftPanel/Attributes/AttributesContainer/EnduranceContainer"]
+layout_mode = 2
+text = "+"
+disabled = true
+
+[node name="RightPanel" type="VBoxContainer" parent="SkillsPanel/VBoxContainer/MainContent"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SkillsSection" type="VBoxContainer" parent="SkillsPanel/VBoxContainer/MainContent/RightPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SkillsHeader" type="HBoxContainer" parent="SkillsPanel/VBoxContainer/MainContent/RightPanel/SkillsSection"]
+layout_mode = 2
+
+[node name="SkillsTitle" type="Label" parent="SkillsPanel/VBoxContainer/MainContent/RightPanel/SkillsSection/SkillsHeader"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "🎯 Skills"
+theme_type_variation = &"HeaderMedium"
+
+[node name="SkillPoints" type="Label" parent="SkillsPanel/VBoxContainer/MainContent/RightPanel/SkillsSection/SkillsHeader"]
+layout_mode = 2
+text = "Skill Points: 0"
+
+[node name="SkillsContainer" type="VBoxContainer" parent="SkillsPanel/VBoxContainer/MainContent/RightPanel/SkillsSection"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="FaithSkill" type="VBoxContainer" parent="SkillsPanel/VBoxContainer/MainContent/RightPanel/SkillsSection/SkillsContainer"]
+layout_mode = 2
+
+[node name="FaithHeader" type="HBoxContainer" parent="SkillsPanel/VBoxContainer/MainContent/RightPanel/SkillsSection/SkillsContainer/FaithSkill"]
+layout_mode = 2
+
+[node name="FaithLabel" type="Label" parent="SkillsPanel/VBoxContainer/MainContent/RightPanel/SkillsSection/SkillsContainer/FaithSkill/FaithHeader"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "✨ Faith: Level 1"
+
+[node name="FaithButton" type="Button" parent="SkillsPanel/VBoxContainer/MainContent/RightPanel/SkillsSection/SkillsContainer/FaithSkill/FaithHeader"]
+layout_mode = 2
+text = "+"
+disabled = true
+
+[node name="FaithProgress" type="ProgressBar" parent="SkillsPanel/VBoxContainer/MainContent/RightPanel/SkillsSection/SkillsContainer/FaithSkill"]
+layout_mode = 2
+max_value = 100.0
+step = 1.0
+
+[node name="WisdomSkill" type="VBoxContainer" parent="SkillsPanel/VBoxContainer/MainContent/RightPanel/SkillsSection/SkillsContainer"]
+layout_mode = 2
+
+[node name="WisdomHeader" type="HBoxContainer" parent="SkillsPanel/VBoxContainer/MainContent/RightPanel/SkillsSection/SkillsContainer/WisdomSkill"]
+layout_mode = 2
+
+[node name="WisdomLabel" type="Label" parent="SkillsPanel/VBoxContainer/MainContent/RightPanel/SkillsSection/SkillsContainer/WisdomSkill/WisdomHeader"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "🧠 Wisdom: Level 1"
+
+[node name="WisdomButton" type="Button" parent="SkillsPanel/VBoxContainer/MainContent/RightPanel/SkillsSection/SkillsContainer/WisdomSkill/WisdomHeader"]
+layout_mode = 2
+text = "+"
+disabled = true
+
+[node name="WisdomProgress" type="ProgressBar" parent="SkillsPanel/VBoxContainer/MainContent/RightPanel/SkillsSection/SkillsContainer/WisdomSkill"]
+layout_mode = 2
+max_value = 100.0
+step = 1.0
+
+[node name="SocialSkill" type="VBoxContainer" parent="SkillsPanel/VBoxContainer/MainContent/RightPanel/SkillsSection/SkillsContainer"]
+layout_mode = 2
+
+[node name="SocialHeader" type="HBoxContainer" parent="SkillsPanel/VBoxContainer/MainContent/RightPanel/SkillsSection/SkillsContainer/SocialSkill"]
+layout_mode = 2
+
+[node name="SocialLabel" type="Label" parent="SkillsPanel/VBoxContainer/MainContent/RightPanel/SkillsSection/SkillsContainer/SocialSkill/SocialHeader"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "🗣️ Social: Level 1"
+
+[node name="SocialButton" type="Button" parent="SkillsPanel/VBoxContainer/MainContent/RightPanel/SkillsSection/SkillsContainer/SocialSkill/SocialHeader"]
+layout_mode = 2
+text = "+"
+disabled = true
+
+[node name="SocialProgress" type="ProgressBar" parent="SkillsPanel/VBoxContainer/MainContent/RightPanel/SkillsSection/SkillsContainer/SocialSkill"]
+layout_mode = 2
+max_value = 100.0
+step = 1.0
+
+[node name="CraftingSkill" type="VBoxContainer" parent="SkillsPanel/VBoxContainer/MainContent/RightPanel/SkillsSection/SkillsContainer"]
+layout_mode = 2
+
+[node name="CraftingHeader" type="HBoxContainer" parent="SkillsPanel/VBoxContainer/MainContent/RightPanel/SkillsSection/SkillsContainer/CraftingSkill"]
+layout_mode = 2
+
+[node name="CraftingLabel" type="Label" parent="SkillsPanel/VBoxContainer/MainContent/RightPanel/SkillsSection/SkillsContainer/CraftingSkill/CraftingHeader"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "🔨 Crafting: Level 1"
+
+[node name="CraftingButton" type="Button" parent="SkillsPanel/VBoxContainer/MainContent/RightPanel/SkillsSection/SkillsContainer/CraftingSkill/CraftingHeader"]
+layout_mode = 2
+text = "+"
+disabled = true
+
+[node name="CraftingProgress" type="ProgressBar" parent="SkillsPanel/VBoxContainer/MainContent/RightPanel/SkillsSection/SkillsContainer/CraftingSkill"]
+layout_mode = 2
+max_value = 100.0
+step = 1.0
+
+[node name="TradingSkill" type="VBoxContainer" parent="SkillsPanel/VBoxContainer/MainContent/RightPanel/SkillsSection/SkillsContainer"]
+layout_mode = 2
+
+[node name="TradingHeader" type="HBoxContainer" parent="SkillsPanel/VBoxContainer/MainContent/RightPanel/SkillsSection/SkillsContainer/TradingSkill"]
+layout_mode = 2
+
+[node name="TradingLabel" type="Label" parent="SkillsPanel/VBoxContainer/MainContent/RightPanel/SkillsSection/SkillsContainer/TradingSkill/TradingHeader"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "💰 Trading: Level 1"
+
+[node name="TradingButton" type="Button" parent="SkillsPanel/VBoxContainer/MainContent/RightPanel/SkillsSection/SkillsContainer/TradingSkill/TradingHeader"]
+layout_mode = 2
+text = "+"
+disabled = true
+
+[node name="TradingProgress" type="ProgressBar" parent="SkillsPanel/VBoxContainer/MainContent/RightPanel/SkillsSection/SkillsContainer/TradingSkill"]
+layout_mode = 2
+max_value = 100.0
+step = 1.0
+
+[node name="HealingSkill" type="VBoxContainer" parent="SkillsPanel/VBoxContainer/MainContent/RightPanel/SkillsSection/SkillsContainer"]
+layout_mode = 2
+
+[node name="HealingHeader" type="HBoxContainer" parent="SkillsPanel/VBoxContainer/MainContent/RightPanel/SkillsSection/SkillsContainer/HealingSkill"]
+layout_mode = 2
+
+[node name="HealingLabel" type="Label" parent="SkillsPanel/VBoxContainer/MainContent/RightPanel/SkillsSection/SkillsContainer/HealingSkill/HealingHeader"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "❤️ Healing: Level 1"
+
+[node name="HealingButton" type="Button" parent="SkillsPanel/VBoxContainer/MainContent/RightPanel/SkillsSection/SkillsContainer/HealingSkill/HealingHeader"]
+layout_mode = 2
+text = "+"
+disabled = true
+
+[node name="HealingProgress" type="ProgressBar" parent="SkillsPanel/VBoxContainer/MainContent/RightPanel/SkillsSection/SkillsContainer/HealingSkill"]
+layout_mode = 2
+max_value = 100.0
+step = 1.0
+
+[node name="CombatSkill" type="VBoxContainer" parent="SkillsPanel/VBoxContainer/MainContent/RightPanel/SkillsSection/SkillsContainer"]
+layout_mode = 2
+
+[node name="CombatHeader" type="HBoxContainer" parent="SkillsPanel/VBoxContainer/MainContent/RightPanel/SkillsSection/SkillsContainer/CombatSkill"]
+layout_mode = 2
+
+[node name="CombatLabel" type="Label" parent="SkillsPanel/VBoxContainer/MainContent/RightPanel/SkillsSection/SkillsContainer/CombatSkill/CombatHeader"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "⚔️ Combat: Level 1"
+
+[node name="CombatButton" type="Button" parent="SkillsPanel/VBoxContainer/MainContent/RightPanel/SkillsSection/SkillsContainer/CombatSkill/CombatHeader"]
+layout_mode = 2
+text = "+"
+disabled = true
+
+[node name="CombatProgress" type="ProgressBar" parent="SkillsPanel/VBoxContainer/MainContent/RightPanel/SkillsSection/SkillsContainer/CombatSkill"]
+layout_mode = 2
+max_value = 100.0
+step = 1.0
+
+[node name="LeadershipSkill" type="VBoxContainer" parent="SkillsPanel/VBoxContainer/MainContent/RightPanel/SkillsSection/SkillsContainer"]
+layout_mode = 2
+
+[node name="LeadershipHeader" type="HBoxContainer" parent="SkillsPanel/VBoxContainer/MainContent/RightPanel/SkillsSection/SkillsContainer/LeadershipSkill"]
+layout_mode = 2
+
+[node name="LeadershipLabel" type="Label" parent="SkillsPanel/VBoxContainer/MainContent/RightPanel/SkillsSection/SkillsContainer/LeadershipSkill/LeadershipHeader"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "👑 Leadership: Level 1"
+
+[node name="LeadershipButton" type="Button" parent="SkillsPanel/VBoxContainer/MainContent/RightPanel/SkillsSection/SkillsContainer/LeadershipSkill/LeadershipHeader"]
+layout_mode = 2
+text = "+"
+disabled = true
+
+[node name="LeadershipProgress" type="ProgressBar" parent="SkillsPanel/VBoxContainer/MainContent/RightPanel/SkillsSection/SkillsContainer/LeadershipSkill"]
+layout_mode = 2
+max_value = 100.0
+step = 1.0
+
+[connection signal="pressed" from="SkillsPanel/VBoxContainer/Header/CloseButton" to="." method="_on_close_button_pressed"]

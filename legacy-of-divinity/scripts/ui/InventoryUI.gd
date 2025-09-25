@@ -10,7 +10,7 @@ extends Control
 @onready var gold_label = $InventoryPanel/VBoxContainer/MainContent/LeftPanel/PlayerStats/StatsContainer/GoldLabel
 
 @onready var equipment_grid = $InventoryPanel/VBoxContainer/MainContent/LeftPanel/Equipment/EquipmentGrid
-@onready var item_grid = $InventoryPanel/VBoxContainer/MainContent/RightPanel/InventoryTabs/AllItems/ItemGrid
+@onready var item_grid = $InventoryPanel/VBoxContainer/MainContent/RightPanel/InventoryTabs/"All Items"/ItemGrid
 @onready var consumable_grid = $InventoryPanel/VBoxContainer/MainContent/RightPanel/InventoryTabs/Consumables/ConsumableGrid
 @onready var equip_grid = $InventoryPanel/VBoxContainer/MainContent/RightPanel/InventoryTabs/Equipment/EquipGrid
 @onready var material_grid = $InventoryPanel/VBoxContainer/MainContent/RightPanel/InventoryTabs/Materials/MaterialGrid
@@ -159,9 +159,9 @@ func _create_item_button(item: Dictionary):
 			consumable_button.pressed.connect(_on_item_button_pressed.bind(item))
 			consumable_grid.add_child(consumable_button)
 		"weapon", "chest", "head", "legs", "feet", "hands", "shield", "accessory", "cloak":
-			var equip_button = button.duplicate()
-			equip_button.pressed.connect(_on_item_button_pressed.bind(item))
-			equip_grid.add_child(equip_button)
+			var equipment_button = button.duplicate()
+			equipment_button.pressed.connect(_on_item_button_pressed.bind(item))
+			equip_grid.add_child(equipment_button)
 		"material":
 			var material_button = button.duplicate()
 			material_button.pressed.connect(_on_item_button_pressed.bind(item))

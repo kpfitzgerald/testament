@@ -19,7 +19,14 @@ signal ui_closed(ui_name)
 
 func _ready():
 	# Initialize UI systems when game is ready
-	call_deferred("_initialize_ui_systems")
+	# Only initialize UI systems if not on main menu
+	var scene_name = get_tree().current_scene.name if get_tree().current_scene else ""
+	if scene_name != "MainMenu":
+		call_deferred("_initialize_ui_systems")
+
+# Public method to manually initialize UI systems when needed
+func initialize_ui_systems():
+	_initialize_ui_systems()
 
 func _initialize_ui_systems():
 	# Wait for the scene tree to be ready

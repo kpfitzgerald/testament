@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://bi5r7j4x5lrdk"]
+[gd_scene load_steps=4 format=3 uid="uid://bi5r7j4x5lrdk"]
 
 [ext_resource type="Script" path="res://scripts/ui/CharacterCreation.gd" id="1_4y6kl"]
+[ext_resource type="Texture2D" path="res://assets/ui/wireframe/App Background.png" id="2_background"]
+[ext_resource type="Texture2D" path="res://assets/ui/wireframe/shadedLight00.png" id="3_panel"]
 
 [node name="CharacterCreation" type="Control"]
 layout_mode = 3
@@ -9,12 +11,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource("1_4y6kl")
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="NinePatchRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color(0.12, 0.08, 0.15, 1)
+texture = ExtResource("2_background")
+mouse_filter = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 layout_mode = 1
@@ -49,9 +52,19 @@ layout_mode = 2
 size_flags_horizontal = 3
 custom_constants/separation = 15
 
+[node name="LeftPanelBG" type="NinePatchRect" parent="ScrollContainer/VBoxContainer/HBoxContainer/LeftPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("3_panel")
+
 [node name="BasicInfo" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/HBoxContainer/LeftPanel"]
 layout_mode = 2
 custom_constants/separation = 10
+
+[node name="BasicInfoBG" type="NinePatchRect" parent="ScrollContainer/VBoxContainer/HBoxContainer/LeftPanel/BasicInfo"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("3_panel")
 
 [node name="BasicInfoTitle" type="Label" parent="ScrollContainer/VBoxContainer/HBoxContainer/LeftPanel/BasicInfo"]
 layout_mode = 2
@@ -89,6 +102,11 @@ layout_mode = 2
 [node name="Appearance" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/HBoxContainer/LeftPanel"]
 layout_mode = 2
 custom_constants/separation = 10
+
+[node name="AppearanceBG" type="NinePatchRect" parent="ScrollContainer/VBoxContainer/HBoxContainer/LeftPanel/Appearance"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("3_panel")
 
 [node name="AppearanceTitle" type="Label" parent="ScrollContainer/VBoxContainer/HBoxContainer/LeftPanel/Appearance"]
 layout_mode = 2
@@ -131,10 +149,20 @@ layout_mode = 2
 size_flags_horizontal = 3
 custom_constants/separation = 15
 
+[node name="RightPanelBG" type="NinePatchRect" parent="ScrollContainer/VBoxContainer/HBoxContainer/RightPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("3_panel")
+
 [node name="Description" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/HBoxContainer/RightPanel"]
 layout_mode = 2
 size_flags_vertical = 3
 custom_constants/separation = 10
+
+[node name="DescriptionBG" type="NinePatchRect" parent="ScrollContainer/VBoxContainer/HBoxContainer/RightPanel/Description"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("3_panel")
 
 [node name="DescriptionTitle" type="Label" parent="ScrollContainer/VBoxContainer/HBoxContainer/RightPanel/Description"]
 layout_mode = 2
@@ -151,6 +179,11 @@ fit_content = true
 [node name="Stats" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/HBoxContainer/RightPanel"]
 layout_mode = 2
 custom_constants/separation = 10
+
+[node name="StatsBG" type="NinePatchRect" parent="ScrollContainer/VBoxContainer/HBoxContainer/RightPanel/Stats"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("3_panel")
 
 [node name="StatsTitle" type="Label" parent="ScrollContainer/VBoxContainer/HBoxContainer/RightPanel/Stats"]
 layout_mode = 2
@@ -185,6 +218,12 @@ layout_mode = 2
 
 [node name="ButtonContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
+
+[node name="ButtonBG" type="NinePatchRect" parent="ScrollContainer/VBoxContainer/ButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("3_panel")
 
 [node name="BackButton" type="Button" parent="ScrollContainer/VBoxContainer/ButtonContainer"]
 layout_mode = 2

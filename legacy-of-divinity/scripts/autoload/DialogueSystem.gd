@@ -9,6 +9,10 @@ var current_dialogue: Dictionary = {}
 var dialogue_history: Dictionary = {}
 var active_npc: String = ""
 
+# AI Integration
+var is_ai_dialogue: bool = false
+var current_ai_npc: Node = null
+
 # Biblical dialogue database
 var dialogue_database: Dictionary = {
 	"high_priest_aaron": {
@@ -524,3 +528,44 @@ func save_dialogue_data() -> Dictionary:
 
 func load_dialogue_data(data: Dictionary):
 	dialogue_history = data.get("dialogue_history", {})
+
+# AI Dialogue Integration Functions
+func start_ai_dialogue(npc: Node):
+	print("DialogueSystem: Starting AI dialogue with ", npc.name)
+	is_ai_dialogue = true
+	current_ai_npc = npc
+	active_npc = npc.npc_name if npc.has_method("get") else npc.name
+	dialogue_started.emit(active_npc)
+
+func end_ai_dialogue():
+	if not is_ai_dialogue:
+		return
+
+	print("DialogueSystem: Ending AI dialogue with ", active_npc)
+	var npc_id = active_npc
+
+	is_ai_dialogue = false
+	current_ai_npc = null
+	active_npc = ""
+
+	dialogue_ended.emit(npc_id)
+
+func send_player_message_to_ai(message: String):
+	if is_ai_dialogue and current_ai_npc and current_ai_npc.has_method("send_player_message"):
+		current_ai_npc.send_player_message(message)
+
+func is_ai_dialogue_active() -> bool:
+	return is_ai_dialogue
+
+func get_current_ai_npc() -> Node:
+	return current_ai_npc
+
+# Hybrid function - try AI first, fall back to traditional
+func start_dialogue_with_npc(npc_id: String, npc_node: Node = null):
+	# If we have an AI NPC node, prefer AI dialogue
+	if npc_node and npc_node.has_method("start_conversation"):
+		npc_node.start_conversation()
+		return
+
+	# Otherwise use traditional dialogue system
+	start_dialogue(npc_id)

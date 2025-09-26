@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/world/GameWorld.gd" id="1_gameworld"]
 [ext_resource type="Script" path="res://scripts/player/PlayerController.gd" id="2_player"]
+[ext_resource type="PackedScene" path="res://scenes/npc/MosesAI.tscn" id="4_moses"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_player"]
 radius = 0.4
@@ -432,6 +433,9 @@ stream = SubResource("AudioStreamGenerator_wind")
 volume_db = -15.0
 autoplay = true
 max_distance = 50.0
+
+[node name="MosesAI" parent="." instance=ExtResource("4_moses")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 2, 25)
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3

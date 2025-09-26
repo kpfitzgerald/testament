@@ -10,7 +10,6 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 visible = false
-mouse_filter = 2
 script = ExtResource("1_dialogue")
 
 [node name="Background" type="NinePatchRect" parent="."]
@@ -20,7 +19,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource("2_dialogue_bg")
 mouse_filter = 2
-modulate = Color(1, 1, 1, 0.7)
+modulate = Color(1, 1, 1, 0.9)
 
 [node name="DialoguePanel" type="NinePatchRect" parent="."]
 layout_mode = 1
@@ -67,6 +66,7 @@ offset_bottom = 11.5
 text = "👤"
 horizontal_alignment = 1
 vertical_alignment = 1
+modulate = Color(0, 0, 0, 1)
 
 [node name="NPCNameContainer" type="VBoxContainer" parent="DialoguePanel/VBoxContainer/NPCInfo"]
 layout_mode = 2
@@ -76,11 +76,13 @@ size_flags_horizontal = 3
 layout_mode = 2
 text = "NPC Name"
 theme_type_variation = &"HeaderMedium"
+modulate = Color(0, 0, 0, 1)
 
 [node name="NPCTitle" type="Label" parent="DialoguePanel/VBoxContainer/NPCInfo/NPCNameContainer"]
 layout_mode = 2
 text = "Title or Role"
 theme_type_variation = &"HeaderSmall"
+modulate = Color(0.2, 0.2, 0.2, 1)
 
 [node name="CloseButton" type="Button" parent="DialoguePanel/VBoxContainer/NPCInfo"]
 layout_mode = 2
@@ -101,6 +103,7 @@ bbcode_enabled = true
 text = "NPC dialogue will appear here..."
 fit_content = true
 scroll_active = false
+modulate = Color(0, 0, 0, 1)
 
 [node name="ChoicesContainer" type="VBoxContainer" parent="DialoguePanel/VBoxContainer/DialogueContent"]
 layout_mode = 2
@@ -109,38 +112,84 @@ layout_mode = 2
 layout_mode = 2
 text = "Choice 1"
 visible = false
-mouse_filter = 2
 alignment = 0
+modulate = Color(1, 1, 1, 1)
 
 [node name="Choice2" type="Button" parent="DialoguePanel/VBoxContainer/DialogueContent/ChoicesContainer"]
 layout_mode = 2
 text = "Choice 2"
 visible = false
-mouse_filter = 2
 alignment = 0
+modulate = Color(1, 1, 1, 1)
 
 [node name="Choice3" type="Button" parent="DialoguePanel/VBoxContainer/DialogueContent/ChoicesContainer"]
 layout_mode = 2
 text = "Choice 3"
 visible = false
-mouse_filter = 2
 alignment = 0
+modulate = Color(1, 1, 1, 1)
 
 [node name="Choice4" type="Button" parent="DialoguePanel/VBoxContainer/DialogueContent/ChoicesContainer"]
 layout_mode = 2
 text = "Choice 4"
 visible = false
-mouse_filter = 2
 alignment = 0
+modulate = Color(1, 1, 1, 1)
 
 [node name="Choice5" type="Button" parent="DialoguePanel/VBoxContainer/DialogueContent/ChoicesContainer"]
 layout_mode = 2
 text = "Choice 5"
 visible = false
-mouse_filter = 2
 alignment = 0
+modulate = Color(1, 1, 1, 1)
 
 [node name="HSeparator2" type="HSeparator" parent="DialoguePanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="PlayerInput" type="VBoxContainer" parent="DialoguePanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="InputLabel" type="Label" parent="DialoguePanel/VBoxContainer/PlayerInput"]
+layout_mode = 2
+text = "Your Response:"
+modulate = Color(0, 0, 0, 1)
+
+[node name="TextInputContainer" type="HBoxContainer" parent="DialoguePanel/VBoxContainer/PlayerInput"]
+layout_mode = 2
+
+[node name="PlayerTextInput" type="LineEdit" parent="DialoguePanel/VBoxContainer/PlayerInput/TextInputContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Type your message to Moses..."
+modulate = Color(1, 1, 1, 1)
+
+[node name="SendButton" type="Button" parent="DialoguePanel/VBoxContainer/PlayerInput/TextInputContainer"]
+layout_mode = 2
+text = "Send"
+modulate = Color(1, 1, 1, 1)
+
+[node name="QuickResponses" type="HBoxContainer" parent="DialoguePanel/VBoxContainer/PlayerInput"]
+layout_mode = 2
+
+[node name="AskAboutLaw" type="Button" parent="DialoguePanel/VBoxContainer/PlayerInput/QuickResponses"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Tell me about the Law"
+modulate = Color(0.8, 1, 0.8, 1)
+
+[node name="AskAboutExodus" type="Button" parent="DialoguePanel/VBoxContainer/PlayerInput/QuickResponses"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "What was Egypt like?"
+modulate = Color(0.8, 1, 0.8, 1)
+
+[node name="AskAboutGod" type="Button" parent="DialoguePanel/VBoxContainer/PlayerInput/QuickResponses"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Tell me about God"
+modulate = Color(0.8, 0.8, 1, 1)
+
+[node name="HSeparator3" type="HSeparator" parent="DialoguePanel/VBoxContainer"]
 layout_mode = 2
 
 [node name="ActionButtons" type="HBoxContainer" parent="DialoguePanel/VBoxContainer"]
@@ -157,13 +206,19 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Continue"
 visible = false
-mouse_filter = 2
+modulate = Color(1, 1, 1, 1)
 
 [node name="EndButton" type="Button" parent="DialoguePanel/VBoxContainer/ActionButtons"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "End Conversation"
+modulate = Color(1, 1, 1, 1)
 
 [connection signal="pressed" from="DialoguePanel/VBoxContainer/NPCInfo/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="text_submitted" from="DialoguePanel/VBoxContainer/PlayerInput/TextInputContainer/PlayerTextInput" to="." method="_on_player_text_submitted"]
+[connection signal="pressed" from="DialoguePanel/VBoxContainer/PlayerInput/TextInputContainer/SendButton" to="." method="_on_send_button_pressed"]
+[connection signal="pressed" from="DialoguePanel/VBoxContainer/PlayerInput/QuickResponses/AskAboutLaw" to="." method="_on_quick_response_pressed" binds= ["Tell me about the Law you received from God"]]
+[connection signal="pressed" from="DialoguePanel/VBoxContainer/PlayerInput/QuickResponses/AskAboutExodus" to="." method="_on_quick_response_pressed" binds= ["What was it like leading the people out of Egypt?"]]
+[connection signal="pressed" from="DialoguePanel/VBoxContainer/PlayerInput/QuickResponses/AskAboutGod" to="." method="_on_quick_response_pressed" binds= ["Tell me about your encounters with the Almighty"]]
 [connection signal="pressed" from="DialoguePanel/VBoxContainer/ActionButtons/ContinueButton" to="." method="_on_continue_button_pressed"]
 [connection signal="pressed" from="DialoguePanel/VBoxContainer/ActionButtons/EndButton" to="." method="_on_end_button_pressed"]

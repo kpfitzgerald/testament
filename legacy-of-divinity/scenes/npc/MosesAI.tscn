@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://b2k5vj7lwgxnu"]
+
+[ext_resource type="Script" path="res://scripts/npc/BiblicalAINPC.gd" id="1_main"]
+[ext_resource type="Texture2D" path="res://assets/npc/tile_0087.png" id="2_moses_sprite"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1"]
+radius = 0.5
+height = 2.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_1"]
+size = Vector2(2, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_texture = ExtResource("2_moses_sprite")
+billboard_mode = 1
+no_depth_test = false
+shading_mode = 0
+
+[node name="MosesAI" type="CharacterBody3D"]
+script = ExtResource("1_main")
+npc_name = "Moses"
+physical_description = "an elderly prophet with a weathered face and long white beard, wearing simple robes and carrying a staff. His eyes hold the wisdom of one who has spoken with the Almighty"
+personality = "wise, patient, and deeply faithful. A reluctant leader chosen by God who speaks with quiet authority. He is humble despite his great calling, and shows compassion for his people"
+location_description = "in the wilderness near Mount Sinai, where God gave the Law. The sacred mountain looms in the distance"
+secret_knowledge = "I know the exact words God spoke when giving the Ten Commandments. I remember the burning bush and the plagues of Egypt. I have seen the glory of the Lord face to face. The location of the Ark of the Covenant is known to me."
+biblical_era = "Exodus period - around 1300 BC, after leading the Israelites out of Egypt"
+relationships = "Brother of Aaron the High Priest, adopted son of Pharaoh's daughter, leader and lawgiver of Israel, husband of Zipporah"
+npc_sprite = ExtResource("2_moses_sprite")
+interaction_radius = 4.0
+show_name_label = true
+can_move = false
+movement_speed = 1.5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_1")
+
+[node name="VisualMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("QuadMesh_1")
+surface_material_override/0 = SubResource("StandardMaterial3D_1")

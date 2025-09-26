@@ -1,12 +1,50 @@
 WARNING: Detected another project.godot at res://GodotNPCAI. The folder will be ignored.
    at: _should_skip_directory (editor/file_system/editor_file_system.cpp:3446)
-WARNING: OBJ: Ambient light for material 'None' is ignored in PBR
-   at: _parse_material_library (editor/import/3d/resource_importer_obj.cpp:60)
+WARNING: UID duplicate detected between res://Godot NPC AI - Assets/Sprites/Characters/tile_0084.png and res://assets/npc/tile_0084.png.
+   at: _process_file_system (editor/file_system/editor_file_system.cpp:1377)
+WARNING: UID duplicate detected between res://Godot NPC AI - Assets/Sprites/Characters/tile_0085.png and res://assets/npc/tile_0085.png.
+   at: _process_file_system (editor/file_system/editor_file_system.cpp:1377)
+WARNING: UID duplicate detected between res://Godot NPC AI - Assets/Sprites/Characters/tile_0086.png and res://assets/npc/tile_0086.png.
+   at: _process_file_system (editor/file_system/editor_file_system.cpp:1377)
+WARNING: UID duplicate detected between res://Godot NPC AI - Assets/Sprites/Characters/tile_0087.png and res://assets/npc/tile_0087.png.
+   at: _process_file_system (editor/file_system/editor_file_system.cpp:1377)
+WARNING: UID duplicate detected between res://Godot NPC AI - Assets/Sprites/Characters/tile_0088.png and res://assets/npc/tile_0088.png.
+   at: _process_file_system (editor/file_system/editor_file_system.cpp:1377)
+WARNING: UID duplicate detected between res://Godot NPC AI - Assets/Sprites/Characters/tile_0096.png and res://assets/npc/tile_0096.png.
+   at: _process_file_system (editor/file_system/editor_file_system.cpp:1377)
+WARNING: UID duplicate detected between res://Godot NPC AI - Assets/Sprites/Characters/tile_0097.png and res://assets/npc/tile_0097.png.
+   at: _process_file_system (editor/file_system/editor_file_system.cpp:1377)
+WARNING: UID duplicate detected between res://Godot NPC AI - Assets/Sprites/Characters/tile_0098.png and res://assets/npc/tile_0098.png.
+   at: _process_file_system (editor/file_system/editor_file_system.cpp:1377)
+WARNING: UID duplicate detected between res://Godot NPC AI - Assets/Sprites/Characters/tile_0099.png and res://assets/npc/tile_0099.png.
+   at: _process_file_system (editor/file_system/editor_file_system.cpp:1377)
+WARNING: UID duplicate detected between res://Godot NPC AI - Assets/Sprites/Characters/tile_0100.png and res://assets/npc/tile_0100.png.
+   at: _process_file_system (editor/file_system/editor_file_system.cpp:1377)
+WARNING: UID duplicate detected between res://Godot NPC AI - Assets/Sprites/Characters/tile_0108.png and res://assets/npc/tile_0108.png.
+   at: _process_file_system (editor/file_system/editor_file_system.cpp:1377)
+WARNING: UID duplicate detected between res://Godot NPC AI - Assets/Sprites/Characters/tile_0109.png and res://assets/npc/tile_0109.png.
+   at: _process_file_system (editor/file_system/editor_file_system.cpp:1377)
+WARNING: UID duplicate detected between res://Godot NPC AI - Assets/Sprites/Characters/tile_0110.png and res://assets/npc/tile_0110.png.
+   at: _process_file_system (editor/file_system/editor_file_system.cpp:1377)
+WARNING: UID duplicate detected between res://Godot NPC AI - Assets/Sprites/Characters/tile_0111.png and res://assets/npc/tile_0111.png.
+   at: _process_file_system (editor/file_system/editor_file_system.cpp:1377)
+WARNING: UID duplicate detected between res://Godot NPC AI - Assets/Sprites/Characters/tile_0112.png and res://assets/npc/tile_0112.png.
+   at: _process_file_system (editor/file_system/editor_file_system.cpp:1377)
+WARNING: UID duplicate detected between res://Godot NPC AI - Assets/Sprites/Characters/tile_0120.png and res://assets/npc/tile_0120.png.
+   at: _process_file_system (editor/file_system/editor_file_system.cpp:1377)
+WARNING: UID duplicate detected between res://Godot NPC AI - Assets/Sprites/Characters/tile_0121.png and res://assets/npc/tile_0121.png.
+   at: _process_file_system (editor/file_system/editor_file_system.cpp:1377)
+WARNING: UID duplicate detected between res://Godot NPC AI - Assets/Sprites/Characters/tile_0122.png and res://assets/npc/tile_0122.png.
+   at: _process_file_system (editor/file_system/editor_file_system.cpp:1377)
+WARNING: UID duplicate detected between res://Godot NPC AI - Assets/Sprites/Characters/tile_0124.png and res://assets/npc/tile_0124.png.
+   at: _process_file_system (editor/file_system/editor_file_system.cpp:1377)
 WARNING: OBJ: Ambient light for material 'bark01' is ignored in PBR
    at: _parse_material_library (editor/import/3d/resource_importer_obj.cpp:60)
 WARNING: OBJ: Ambient light for material 'leaf04' is ignored in PBR
    at: _parse_material_library (editor/import/3d/resource_importer_obj.cpp:60)
 WARNING: OBJ: Ambient light for material 'leaf06' is ignored in PBR
+   at: _parse_material_library (editor/import/3d/resource_importer_obj.cpp:60)
+WARNING: OBJ: Ambient light for material 'None' is ignored in PBR
    at: _parse_material_library (editor/import/3d/resource_importer_obj.cpp:60)
 WARNING: OBJ: Ambient light for material 'Grass' is ignored in PBR
    at: _parse_material_library (editor/import/3d/resource_importer_obj.cpp:60)

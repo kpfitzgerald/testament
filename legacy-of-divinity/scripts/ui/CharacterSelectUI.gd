@@ -186,10 +186,10 @@ func _on_play_character(slot_id: int):
 	print("CharacterSelectUI: PLAY button clicked for slot ", slot_id)
 	if CharacterSlots:
 		CharacterSlots.select_character_slot(slot_id)
-	print("CharacterSelectUI: Changing scene to GameWorld")
-	var error = get_tree().change_scene_to_file("res://scenes/world/GameWorld.tscn")
+	print("CharacterSelectUI: Changing scene to BiblicalWorld")
+	var error = get_tree().change_scene_to_file("res://scenes/world/BiblicalWorld.tscn")
 	if error != OK:
-		print("ERROR: Failed to change scene to GameWorld - Error code: ", error)
+		print("ERROR: Failed to change scene to BiblicalWorld - Error code: ", error)
 
 func _on_reset_character(slot_id: int):
 	print("CharacterSelectUI: RESET button clicked for slot ", slot_id)

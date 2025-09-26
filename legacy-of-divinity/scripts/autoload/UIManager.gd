@@ -168,6 +168,17 @@ func start_dialogue(npc_id: String):
 	dialogue_ui.show_dialogue(npc_id)
 	_set_current_ui(dialogue_ui, "dialogue")
 
+# AI Dialogue UI functions
+func start_ai_dialogue(npc_name: String):
+	if not dialogue_ui:
+		print("Dialogue UI not initialized")
+		return
+
+	_close_current_ui()
+	dialogue_ui.show_ai_dialogue(npc_name)
+	_set_current_ui(dialogue_ui, "dialogue")
+	print("UIManager: AI dialogue started for ", npc_name)
+
 func close_dialogue():
 	if dialogue_ui and dialogue_ui.visible:
 		dialogue_ui.hide_dialogue()
@@ -177,6 +188,9 @@ func close_dialogue():
 func _set_current_ui(ui: Control, ui_name: String):
 	current_open_ui = ui
 	ui_stack.push_back(ui)
+	# Free mouse when opening any UI
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	print("UIManager: Mouse freed for UI interaction (", ui_name, ")")
 	ui_opened.emit(ui_name)
 
 func _clear_current_ui(ui_name: String):
@@ -190,10 +204,17 @@ func _clear_current_ui(ui_name: String):
 		# Only assign if the previous UI is still valid
 		if is_instance_valid(previous_ui):
 			current_open_ui = previous_ui
+			# Keep mouse free if other UI is still open
+			print("UIManager: Switching to previous UI, mouse remains free")
 		else:
 			# Remove invalid UI from stack
 			ui_stack.erase(previous_ui)
 			current_open_ui = null
+
+	# FORCE mouse to captured mode when all UI is closed - this fixes interaction
+	if current_open_ui == null:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		print("UIManager: FORCING mouse captured mode to fix interaction")
 
 	ui_closed.emit(ui_name)
 
@@ -213,6 +234,10 @@ func close_all_ui():
 	current_open_ui = null
 	ui_stack.clear()
 
+	# FORCE mouse to captured mode - this fixes interaction
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	print("UIManager: FORCING mouse captured - all UI closed (interaction fix)")
+
 func is_any_ui_open() -> bool:
 	return current_open_ui != null
 
@@ -230,9 +255,13 @@ func _input(event):
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_I, KEY_TAB:
-				toggle_inventory()
+				# Don't open inventory if dialogue is active
+				if get_current_ui_name() != "dialogue":
+					toggle_inventory()
 			KEY_K:
-				toggle_skills()
+				# Don't open skills if dialogue is active
+				if get_current_ui_name() != "dialogue":
+					toggle_skills()
 			KEY_ESCAPE:
 				if is_any_ui_open():
 					_close_current_ui()

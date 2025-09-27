@@ -39,8 +39,8 @@ func _ready():
 	print("AIDialogue: Initializing AI NPC system")
 
 	# Set your OpenAI API key
-	api_key = "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"
-	print("AIDialogue: API key loaded successfully")
+	api_key = "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"
+	print("AIDialogue: API key loaded (length: ", api_key.length(), ")")
 
 	# Set up headers with API key
 	headers = ["Content-Type: application/json", "Authorization: Bearer " + api_key]
@@ -49,6 +49,10 @@ func _ready():
 	request = HTTPRequest.new()
 	add_child(request)
 	request.request_completed.connect(_on_request_completed)
+
+	# Configure for HTTPS/SSL
+	request.set_tls_options(TLSOptions.client())
+	print("AIDialogue: SSL/TLS configured")
 
 	print("AIDialogue: AI dialogue system ready")
 
@@ -99,21 +103,46 @@ func _send_ai_request(user_message: String):
 		"max_tokens": max_tokens
 	})
 
+	# Debug the request
+	print("AIDialogue: Sending request to OpenAI...")
+	print("AIDialogue: URL: ", url)
+	print("AIDialogue: Body: ", body)
+
 	# Send request
 	var error = request.request(url, headers, HTTPClient.METHOD_POST, body)
 	if error != OK:
 		print("AIDialogue: Error sending request: ", error)
 		is_ai_thinking = false
 		ai_thinking_finished.emit()
+	else:
+		print("AIDialogue: Request sent successfully, waiting for response...")
 
 # Handle AI API response
 func _on_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray):
+	print("AIDialogue: Response received!")
+	print("AIDialogue: Result: ", result)
+	print("AIDialogue: Response code: ", response_code)
+	print("AIDialogue: Body length: ", body.size())
+
 	is_ai_thinking = false
 	ai_thinking_finished.emit()
 
 	if response_code != 200:
 		print("AIDialogue: API error - Response code: ", response_code)
-		print("AIDialogue: Response body: ", body.get_string_from_utf8())
+		var response_text = body.get_string_from_utf8()
+		print("AIDialogue: Full error response: ", response_text)
+
+		# Try to parse error details
+		var json = JSON.new()
+		var parse_result = json.parse(response_text)
+		if parse_result == OK:
+			var error_data = json.get_data()
+			if error_data.has("error"):
+				print("AIDialogue: Error details: ", error_data["error"])
+
+		# Emit a fallback response for testing
+		var npc_name = current_npc.get("name", "Unknown")
+		ai_response_ready.emit(npc_name, "Peace be with you, traveler. I am " + npc_name + ". (API Error " + str(response_code) + " - check console for details)")
 		return
 
 	# Parse response

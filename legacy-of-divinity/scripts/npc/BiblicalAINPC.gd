@@ -101,19 +101,11 @@ func _connect_ai_signals():
 		print("BiblicalAINPC: Warning - AIDialogue system not available")
 
 func _input(event):
-	# Debug all key events when player is in range
-	if player_in_range and event is InputEventKey and event.pressed:
-		print("🔑 MOSES DEBUG: Key pressed while player in range: ", event.keycode, " (E key is 69)")
-		if event.keycode == 69:  # E key
-			print("🔑 MOSES DEBUG: E key detected! is_in_conversation: ", is_in_conversation)
-
-	if event.is_action_pressed("interact"):
-		print("🔑 MOSES DEBUG: Interact action detected! player_in_range: ", player_in_range, ", is_in_conversation: ", is_in_conversation)
-		if player_in_range and not is_in_conversation:
-			print("🔑 MOSES DEBUG: Starting conversation!")
-			start_conversation()
-		else:
-			print("🔑 MOSES DEBUG: Cannot start conversation - player_in_range: ", player_in_range, ", is_in_conversation: ", is_in_conversation)
+	# Simple, direct interaction handling
+	if event.is_action_pressed("interact") and player_in_range and not is_in_conversation:
+		print("🔑 MOSES: Starting conversation with E key!")
+		start_conversation()
+		get_viewport().set_input_as_handled()  # Prevent other systems from processing this input
 
 func _on_player_entered(body):
 	print("BiblicalAINPC: Body entered area: ", body.name, " (type: ", body.get_class(), ")")
@@ -213,6 +205,10 @@ func end_conversation():
 		print("BiblicalAINPC: Dialogue UI closed for ", npc_name)
 	else:
 		print("BiblicalAINPC: Conversation ended with ", npc_name)
+
+	# Force mouse capture to ensure proper input state
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	print("BiblicalAINPC: Forced mouse capture after conversation end")
 
 	# Show interaction prompt again if player still in range
 	if player_in_range:
